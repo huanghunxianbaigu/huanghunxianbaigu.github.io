@@ -1764,7 +1764,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ffadff;
+  background: #50d7f4;
 }
 .feed-link,
 .chat {
@@ -2986,10 +2986,6 @@ span.exturl {
 }
 .post-block {
   background: rgba(255,255,255,0.4);
-}
-.posts-expand .post-title-link {
-  background: rgba(255,255,255,0.4);
-  color: #000;
 }
 .btn {
   color: #000;
