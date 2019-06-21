@@ -94,18 +94,18 @@
 
 
 
-  <meta name="description" content="next 设置背景图片  * 找到 \themes\next\source\css_custom\custom.styl 文件在文件中添加代码        1    2    3    4    5    6    7    8    9    10    11    12    13    14            @media screen and (min-width:1200px) {">
+  <meta name="description" content="next 配置详解  * 参考网页 http://theme-next.iissnan.com/ 里面有详细的配置方法  next 设置背景图片  * 找到 \themes\next\source\css_custom\custom.styl 文件在文件中添加代码        1    2    3    4    5    6    7    8    9    10    11    12">
 <meta name="keywords" content="Hexo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo next主题设置">
 <meta property="og:url" content="http://yoursite.com/2019/06/21/Hexo-next主题设置/index.html">
 <meta property="og:site_name" content="黄昏现白骨">
-<meta property="og:description" content="next 设置背景图片  * 找到 \themes\next\source\css_custom\custom.styl 文件在文件中添加代码        1    2    3    4    5    6    7    8    9    10    11    12    13    14            @media screen and (min-width:1200px) {">
+<meta property="og:description" content="next 配置详解  * 参考网页 http://theme-next.iissnan.com/ 里面有详细的配置方法  next 设置背景图片  * 找到 \themes\next\source\css_custom\custom.styl 文件在文件中添加代码        1    2    3    4    5    6    7    8    9    10    11    12">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-06-21T12:11:58.375Z">
+<meta property="og:updated_time" content="2019-06-21T13:38:32.846Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo next主题设置">
-<meta name="twitter:description" content="next 设置背景图片  * 找到 \themes\next\source\css_custom\custom.styl 文件在文件中添加代码        1    2    3    4    5    6    7    8    9    10    11    12    13    14            @media screen and (min-width:1200px) {">
+<meta name="twitter:description" content="next 配置详解  * 参考网页 http://theme-next.iissnan.com/ 里面有详细的配置方法  next 设置背景图片  * 找到 \themes\next\source\css_custom\custom.styl 文件在文件中添加代码        1    2    3    4    5    6    7    8    9    10    11    12">
 
 
 
@@ -411,7 +411,7 @@
                 
               
 
-              <time title="创建时间：2019-06-21 19:24:44 / 修改时间：20:11:58" itemprop="dateCreated datePublished" datetime="2019-06-21T19:24:44+08:00">2019-06-21</time>
+              <time title="创建时间：2019-06-21 19:24:44 / 修改时间：21:38:32" itemprop="dateCreated datePublished" datetime="2019-06-21T19:24:44+08:00">2019-06-21</time>
             
 
             
@@ -468,7 +468,10 @@
       
 
       
-        <h2 id="next-设置背景图片"><a href="#next-设置背景图片" class="headerlink" title="next 设置背景图片"></a>next 设置背景图片</h2><ul>
+        <h2 id="next-配置详解"><a href="#next-配置详解" class="headerlink" title="next 配置详解"></a>next 配置详解</h2><ul>
+<li>参考网页  <a href="http://theme-next.iissnan.com/" target="_blank" rel="noopener">http://theme-next.iissnan.com/</a>  里面有详细的配置方法</li>
+</ul>
+<h2 id="next-设置背景图片"><a href="#next-设置背景图片" class="headerlink" title="next 设置背景图片"></a>next 设置背景图片</h2><ul>
 <li><p>找到 \themes\next\source\css_custom\custom.styl 文件在文件中添加代码</p>
   <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">media</span> screen and (min-width:<span class="number">1200px</span>) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="selector-tag">body</span> &#123;</span><br><span class="line">    <span class="attribute">background-image</span>:<span class="built_in">url</span>(/images/background.jpg); </span><br><span class="line">    <span class="attribute">background-repeat</span>: no-repeat;</span><br><span class="line">    <span class="attribute">background-attachment</span>:fixed;</span><br><span class="line">    <span class="attribute">background-position</span>:<span class="number">50%</span> <span class="number">50%</span>; </span><br><span class="line">    <span class="attribute">background-size</span>:cover</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="selector-id">#footer</span> <span class="selector-tag">a</span> &#123;</span><br><span class="line">        <span class="attribute">color</span>:<span class="number">#eee</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
@@ -501,6 +504,11 @@
   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ hexo clean</span><br><span class="line">$ hexo g</span><br><span class="line">$ hexo s </span><br><span class="line">$ hexo d</span><br></pre></td></tr></table></figure>
 
 </li>
+</ul>
+<h2 id="next-自定义页面-CSS-属性"><a href="#next-自定义页面-CSS-属性" class="headerlink" title="next 自定义页面 CSS 属性"></a>next 自定义页面 CSS 属性</h2><ul>
+<li>启动本地服务  httplocahost:4000  进入主页</li>
+<li>F12启动控制台 右键想要改变的模块类名</li>
+<li>进入  next 主题文件夹下的  /source/css/_custom  找到  custom.styl  文件，这个文件是next供我们自定义样式的。在里面添加 CSS 样式即改变页面 CSS 属性</li>
 </ul>
 
       
@@ -706,7 +714,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#next-设置背景图片"><span class="nav-number">1.</span> <span class="nav-text">next 设置背景图片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#next-设置背景动画-Canvas-nest-（-粒子特效-）"><span class="nav-number">2.</span> <span class="nav-text">next 设置背景动画 Canvas_nest （ 粒子特效 ）</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#next-配置详解"><span class="nav-number">1.</span> <span class="nav-text">next 配置详解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#next-设置背景图片"><span class="nav-number">2.</span> <span class="nav-text">next 设置背景图片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#next-设置背景动画-Canvas-nest-（-粒子特效-）"><span class="nav-number">3.</span> <span class="nav-text">next 设置背景动画 Canvas_nest （ 粒子特效 ）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#next-自定义页面-CSS-属性"><span class="nav-number">4.</span> <span class="nav-text">next 自定义页面 CSS 属性</span></a></li></ol></div>
             
 
           </div>
