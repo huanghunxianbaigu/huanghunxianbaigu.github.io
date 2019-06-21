@@ -102,7 +102,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/06/21/Vue框架级请求/"  >Hello World</a>
+      <a class="article-title" href="/2019/06/21/Vue框架级请求/"  >Vue 框架级请求</a>
     </h1>
   
 
@@ -118,31 +118,65 @@
     
     <div class="article-entry " itemprop="articleBody">
       
-        <div class="article-img">
-            <a href="/2019/06/21/Vue框架级请求/" >
-                
-                <img src="http://yoursite.com//images/banner.jpg" alt="Hello World" title="Hello World">
-                
-            </a>
-        </div>
-        <div class="article-feed">
-            <p>
-                Vue 框架级请求
-vue-resource（停止更新）
- * vue-resource作者推荐使用axios
- * vue-resource在用法上和axios 相似度90+
- * vue2.0使用的基本上都是fetch / axios
- * vue-resource *是有 *jsonp 的
- * vue-resource 如果在vue中使用，是挂载当前的实例（ 组件 ）的 $http 属性身上的 * this.$http( options )
-    * this.$htttp.get( )
-    * this.$http.post( )
-   
-   
+            
+            <h1 id="Vue-框架级请求"><a href="#Vue-框架级请求" class="headerlink" title="Vue 框架级请求"></a>Vue 框架级请求</h1><h2 id="vue-resource（停止更新）"><a href="#vue-resource（停止更新）" class="headerlink" title="vue-resource（停止更新）"></a>vue-resource（停止更新）</h2><ul>
+<li><strong>vue-resource</strong>作者推荐使用<strong>axios</strong></li>
+<li><strong>vue-resource</strong>在用法上和<strong>axios</strong> 相似度90+</li>
+<li><strong>vue2.0</strong>使用的基本上都是<strong>fetch / axios</strong></li>
+<li><strong>vue-resource *<em>是有 *</em>jsonp</strong> 的</li>
+<li><strong>vue-resource</strong> 如果在<strong>vue</strong>中使用，是挂载当前的实例（ 组件 ）的 <strong>$http</strong> 属性身上的<ul>
+<li><strong>this.$http( options )</strong></li>
+<li><strong>this.$htttp.get(  )</strong></li>
+<li><strong>this.$http.post(  )</strong></li>
+</ul>
+</li>
+</ul>
+<h2 id="axios（第三方库）"><a href="#axios（第三方库）" class="headerlink" title="axios（第三方库）"></a>axios（第三方库）</h2><ul>
+<li><p>axios 是没有 jsonp 数据请求类型的</p>
+</li>
+<li><p>axios 是promise（ 异步 ）</p>
+</li>
+<li><p>axios 会对请求的结果进行再一次封装（ 提高安全性 ）</p>
+</li>
+<li><p>案例：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span> = <span class="string">"getData"</span>&gt;</span> get - mock - json <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span> = <span class="string">"get_be_data"</span>&gt;</span> get - backend online- api <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span> = <span class="string">"get_myself_php_data"</span>&gt;</span> get - myself - php -api <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span> = <span class="string">"postData"</span>&gt;</span> post <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-axios（第三方库）
- *
-            </p>
-        </div>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#app'</span>,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    getData () &#123;</span><br><span class="line">      <span class="comment">//进行get请求</span></span><br><span class="line">      <span class="comment">// axios.get()    -- $.get()</span></span><br><span class="line">      <span class="comment">// axios.post()    ---$.post()</span></span><br><span class="line">      <span class="comment">// axios(options)      -- $.ajax(options)</span></span><br><span class="line">  </span><br><span class="line">      <span class="comment">// var p = axios(&#123;</span></span><br><span class="line">      <span class="comment">//   url: './data/data.json'</span></span><br><span class="line">      <span class="comment">// &#125;)</span></span><br><span class="line">  </span><br><span class="line">      <span class="comment">// console.log( p )  Promise对象</span></span><br><span class="line">  </span><br><span class="line">      axios(&#123;</span><br><span class="line">        url: <span class="string">'./data/data.json'</span>,</span><br><span class="line">        method: <span class="string">'get'</span>,<span class="comment">//默认就是get请求</span></span><br><span class="line">      &#125;)</span><br><span class="line">        .then( <span class="function"><span class="params">res</span> =&gt;</span> <span class="built_in">console</span>.log( res ))</span><br><span class="line">        .catch( <span class="function"><span class="params">error</span> =&gt;</span> conosle.log( error ))</span><br><span class="line">    </span><br><span class="line">  </span><br><span class="line">    &#125;,</span><br><span class="line">    postData () &#123;</span><br><span class="line">      <span class="comment">// 进行post请求</span></span><br><span class="line">    &#125;,</span><br><span class="line">    get_myself_php_data () &#123;</span><br><span class="line">      axios(&#123;</span><br><span class="line">        url: <span class="string">'http://localhost/get.php'</span>,</span><br><span class="line">        params: &#123;</span><br><span class="line">          a: <span class="number">1</span>,</span><br><span class="line">          b: <span class="number">2</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">        .then( <span class="function"><span class="params">res</span> =&gt;</span> <span class="built_in">console</span>.log( res ))</span><br><span class="line">        .catch( <span class="function"><span class="params">error</span> =&gt;</span> <span class="built_in">console</span>.log( error ))</span><br><span class="line">    &#125;,</span><br><span class="line">    get_be_data () &#123;</span><br><span class="line">      <span class="comment">// 跨域请求线上数据 - 卖座网</span></span><br><span class="line">      axios(&#123;</span><br><span class="line">        url: <span class="string">'https://m.maizuo.com/gateway'</span>,</span><br><span class="line">        headers: &#123;</span><br><span class="line">          <span class="string">'X-Client-Info'</span>: <span class="string">'&#123;"a":"3000","ch":"1002","v":"5.0.4","e":"154549400038873748996477"&#125;'</span>,</span><br><span class="line">          <span class="string">'X-Host'</span>: <span class="string">'mall.film-ticket.film.list'</span></span><br><span class="line">        &#125;,</span><br><span class="line">        params: &#123;</span><br><span class="line">          cityId: <span class="number">330100</span>,</span><br><span class="line">          pageNum: <span class="number">1</span>,</span><br><span class="line">          pageSize: <span class="number">10</span>,</span><br><span class="line">          type: <span class="number">1</span>,</span><br><span class="line">          k: <span class="number">7675918</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)  </span><br><span class="line">        .then( <span class="function"><span class="params">res</span> =&gt;</span> <span class="built_in">console</span>.log( res ))</span><br><span class="line">        .catch( <span class="function"><span class="params">error</span> =&gt;</span> <span class="built_in">console</span>.log( error ))</span><br><span class="line">  </span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<h2 id="fetch-javascript-原生提供"><a href="#fetch-javascript-原生提供" class="headerlink" title="fetch ( javascript 原生提供 )"></a>fetch ( javascript 原生提供 )</h2><ul>
+<li><strong>fetch</strong>  要手动进行一次数据格式化，但是 <strong>axios</strong> 是内部惊醒了数据的格式化</li>
+<li><strong>fetch get</strong> 方法请求数据，参数要直接连接在 <strong>url</strong> 上</li>
+<li><strong>fetch</strong> 格式化数据 有三种处理方法<ul>
+<li><strong>.json(  )</strong> 格式化 json 类型数据， 将 <strong>json</strong> 类型 <strong>string</strong> 转换成 <strong>json</strong> 对象</li>
+<li><strong>.text(  )</strong>  格式化文本</li>
+<li><strong>.blob(  )</strong> 格式化二进制数据</li>
+</ul>
+</li>
+<li><strong>fetch</strong> 如果按照官网文档书写<strong>post</strong>请求， 有坑 ， 携带数据出现问题</li>
+<li><strong>fetch post</strong>处理<ul>
+<li>设置请求头</li>
+<li>通过 <strong>new URLSearchPrams</strong> 来携带参数</li>
+</ul>
+</li>
+</ul>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2019年06月21日 12:08</p>
+        <p>原始链接： <a class="post-url" href="/2019/06/21/Vue框架级请求/" title="Vue 框架级请求">http://yoursite.com/2019/06/21/Vue框架级请求/</a></p>
+        <footer>
+            <a href="http://yoursite.com">
+                <img src="/images/logo.png" alt="XiaoRuo">
+                XiaoRuo
+            </a>
+        </footer>
+    </div>
+</div>
+
       
         
     </div>
@@ -163,113 +197,6 @@ axios（第三方库）
         </ul>
         
             <a href="/2019/06/21/Vue框架级请求/#more" class="article-more-link" >more&gt;&gt;</a>
-        
-    </footer>
-  </div>
-</article>
-
-
-  
-    <article id="post-My-New-Post" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/06/20/My-New-Post/"  >My-New-Post</a>
-    </h1>
-  
-
-          
-              <span class="header-cate">
-                <i class="fa fa-map-marker"></i>
-                  
-                  <a href="/categories/First/">First</a>
-                  
-              </span>
-          
-      </header>
-    
-    <div class="article-entry " itemprop="articleBody">
-      
-        <div class="article-img">
-            <a href="/2019/06/20/My-New-Post/" >
-                
-                <img src="http://yoursite.com//images/banner.jpg" alt="My-New-Post" title="My-New-Post">
-                
-            </a>
-        </div>
-        <div class="article-feed">
-            <p>
-                三阶段介绍重点：
- 1. 纪律
- 2. 笔记
- 3. 做一个主动的人
- 4. 阶段内容
-
-学习目录的创建
-1
-2
-3
-4
-5
-6
-7
-8
-9
-
-
-三阶段
-	老师参考资料
-		1-Node.js
-		2-Vue.js
-		3-React.js
-    自己的
-    	1-Node.js
-    		day01
-    		day02
-
-
-前端软件的安装
-​ Typora md文件的编辑器（ 安装没有要求 ） / 有道云 / 印象笔记
-
-​ git bash
-
-​ Vs code 
-
-账号的注册
- 1. 码云
- 2. github.com
- 3. csdn
- 4. 博客园
-
-复习Node.js
-
-            </p>
-        </div>
-      
-        
-    </div>
-    <footer class="article-footer">
-        
-        <ul class="article-footer-menu">
-            
-                <li><i class="fa fa-calendar"></i>2019-06-20</li>
-            
-            
-  <li class="article-footer-tags">
-    <i class="fa fa-tags"></i>
-      
-    <a href="/tags/First/" class="color1">First</a>
-      
-    <a href="/tags/Second/" class="color2">Second</a>
-      
-  </li>
-
-        </ul>
-        
-            <a href="/2019/06/20/My-New-Post/#more" class="article-more-link" >more&gt;&gt;</a>
         
     </footer>
   </div>
@@ -322,10 +249,10 @@ axios（第三方库）
 <div class="sidebar-menu-box" id="sidebar-menu-box">
     <div class="sidebar-menu-box-container">
         <div id="sidebar-menu-box-categories">
-            <a class="category-link" href="/categories/First/">First</a><a class="category-link" href="/categories/Vue/">Vue</a>
+            <a class="category-link" href="/categories/Vue/">Vue</a>
         </div>
         <div id="sidebar-menu-box-tags">
-            <a href="/tags/First/" style="font-size: 10px;">First</a> <a href="/tags/Second/" style="font-size: 10px;">Second</a> <a href="/tags/Vue框架级请求/" style="font-size: 10px;">Vue框架级请求</a>
+            <a href="/tags/Vue框架级请求/" style="font-size: 10px;">Vue框架级请求</a>
         </div>
     </div>
     <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
@@ -358,7 +285,7 @@ axios（第三方库）
     <div class="mobile-header-tag-container">
         <span class="title">Tags</span>
         <div id="mobile-header-container-tags">
-            <a href="/tags/First/" style="font-size: 10px;">First</a> <a href="/tags/Second/" style="font-size: 10px;">Second</a> <a href="/tags/Vue框架级请求/" style="font-size: 10px;">Vue框架级请求</a>
+            <a href="/tags/Vue框架级请求/" style="font-size: 10px;">Vue框架级请求</a>
         </div>
     </div>
 </div>
