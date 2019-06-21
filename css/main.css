@@ -1764,7 +1764,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #d5f4dd;
+  background: #ffadff;
 }
 .feed-link,
 .chat {
@@ -2955,4 +2955,58 @@ ul.breadcrumb li+li:last-child {
   .pagination {
     margin: 8px 0 0;
   }
+}
+@media screen and (min-width: 1200px) {
+  body {
+    background-image: url("/images/banner.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: 50% 50%;
+    background-size: cover;
+  }
+  #footer a {
+    color: #eee;
+  }
+}
+body {
+  color: #000;
+}
+a,
+span.exturl {
+  color: #000;
+}
+.header-inner {
+  opacity: 0.5;
+}
+.site-meta {
+  background: #0cc;
+}
+.site-title {
+  color: #000;
+}
+.post-block {
+  background: rgba(255,255,255,0.4);
+}
+.posts-expand .post-title-link {
+  background: rgba(255,255,255,0.4);
+  color: #000;
+}
+.btn {
+  color: #000;
+  background: rgba(0,204,204,0.5);
+  border: 2px solid rgba(0,204,204,0.5);
+}
+.btn:hover {
+  border-color: #0cc;
+  color: #000;
+  background: #0cc;
+}
+.menu-item-active a,
+.menu .menu-item a:hover,
+.menu .menu-item span.exturl:hover {
+  background: #0cc;
+}
+.headband {
+  background: #0cc;
+  opacity: 0.2;
 }
