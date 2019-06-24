@@ -102,7 +102,7 @@
 <meta property="og:site_name" content="黄昏现白骨">
 <meta property="og:description" content="Vue 有两大特性  1. 指令 - - 用来操作 DOM       2. 组件 - - 组件是 html css js 等的一个聚合体       3. 为什么要使用组件？      1. 组件化 * 将一个具备完整功能的项目的一部分进行多处使用          * 加快项目的进度          * 可以进行项目的复用                        2. 要想实现组件化，">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-06-24T11:15:31.283Z">
+<meta property="og:updated_time" content="2019-06-24T11:20:34.406Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vue 组件">
 <meta name="twitter:description" content="Vue 有两大特性  1. 指令 - - 用来操作 DOM       2. 组件 - - 组件是 html css js 等的一个聚合体       3. 为什么要使用组件？      1. 组件化 * 将一个具备完整功能的项目的一部分进行多处使用          * 加快项目的进度          * 可以进行项目的复用                        2. 要想实现组件化，">
@@ -382,7 +382,7 @@
                 
               
 
-              <time title="创建时间：2019-06-24 16:34:47 / 修改时间：19:15:31" itemprop="dateCreated datePublished" datetime="2019-06-24T16:34:47+08:00">2019-06-24</time>
+              <time title="创建时间：2019-06-24 16:34:47 / 修改时间：19:20:34" itemprop="dateCreated datePublished" datetime="2019-06-24T16:34:47+08:00">2019-06-24</time>
             
 
             
@@ -488,26 +488,20 @@
 </li>
 <li><p>组件的嵌套</p>
 <ul>
-<li><p>父组件里面放子组件 - - - 类似于  dom  的父子级结构</p>
-</li>
-<li><p>将子组件以标签的形式放在父组件的模板中使用</p>
-</li>
-<li><p>切记！不要放在父组件的内容中。</p>
-</li>
-<li><p>组件不仅可以用双标签表示，也可以使用单标签表示</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 下面这种写法是错误的 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">Father</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Son</span>&gt;</span><span class="tag">&lt;/<span class="name">Son</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">Father</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 正确的应该是 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">Father</span>&gt;</span><span class="tag">&lt;/<span class="name">Father</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(<span class="string">'Father'</span>,&#123;</span><br><span class="line">  template: <span class="string">'&lt;div&gt; Father &lt;Son&gt;&lt;/Son&gt;&lt;/div&gt;'</span></span><br><span class="line">&#125;)</span><br><span class="line">        </span><br><span class="line">Vue.component(<span class="string">'Son'</span>,&#123;</span><br><span class="line">  template: <span class="string">'&lt;div&gt; son &lt;/div&gt;'</span></span><br><span class="line">&#125;)</span><br><span class="line">        </span><br><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#app'</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#app'</span>,</span><br><span class="line">  components: &#123;</span><br><span class="line">    <span class="string">'Father'</span>: &#123;</span><br><span class="line">      template: <span class="string">'&lt;div&gt; father组件 &lt;Son /&gt;&lt;/div&gt;'</span>,</span><br><span class="line">      components: &#123;</span><br><span class="line">        <span class="string">'Son'</span>: &#123;</span><br><span class="line">          template: <span class="string">'&lt;div&gt; son组件 &lt;/div&gt;'</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
+<li>父组件里面放子组件 - - - 类似于  dom  的父子级结构</li>
+<li>将子组件以标签的形式放在父组件的模板中使用</li>
+<li>切记！不要放在父组件的内容中。</li>
+<li>组件不仅可以用双标签表示，也可以使用单标签表示</li>
 </ul>
 </li>
 </ol>
-<ol start="5">
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 下面这种写法是错误的 --&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">Father</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Son</span>&gt;</span><span class="tag">&lt;/<span class="name">Son</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">Father</span>&gt;</span></span><br><span class="line">      <span class="comment">&lt;!-- 正确的应该是 --&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">Father</span>&gt;</span><span class="tag">&lt;/<span class="name">Father</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+<pre><code><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">    Vue.component(<span class="string">'Father'</span>,&#123;</span><br><span class="line">template: <span class="string">'&lt;div&gt; Father &lt;Son&gt;&lt;/Son&gt;&lt;/div&gt;'</span></span><br><span class="line">    &#125;)</span><br><span class="line">  </span><br><span class="line">    Vue.component(<span class="string">'Son'</span>,&#123;</span><br><span class="line">      template: <span class="string">'&lt;div&gt; son &lt;/div&gt;'</span></span><br><span class="line">    &#125;)</span><br><span class="line">  </span><br><span class="line">    <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">      el: <span class="string">'#app'</span></span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">    <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">el: <span class="string">'#app'</span>,</span><br><span class="line">      components: &#123;</span><br><span class="line">        <span class="string">'Father'</span>: &#123;</span><br><span class="line">          template: <span class="string">'&lt;div&gt; father组件 &lt;Son /&gt;&lt;/div&gt;'</span>,</span><br><span class="line">          components: &#123;</span><br><span class="line">            <span class="string">'Son'</span>: &#123;</span><br><span class="line">              template: <span class="string">'&lt;div&gt; son组件 &lt;/div&gt;'</span></span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure></code></pre><ol start="5">
 <li><h2 id="掌握的组件内容"><a href="#掌握的组件内容" class="headerlink" title="掌握的组件内容"></a>掌握的组件内容</h2><ol>
 <li>Vue  是如何扩展组件的？</li>
 <li>Vue  为什么要以标签的形式使用组件</li>
@@ -523,37 +517,43 @@
 </ol>
 <ol start="7">
 <li><h2 id="组件的-template"><a href="#组件的-template" class="headerlink" title="组件的  template"></a>组件的  template</h2><h3 id="template-使用"><a href="#template-使用" class="headerlink" title="template  使用"></a>template  使用</h3><ul>
-<li><p>实例范围内使用</p>
+<li>实例范围内使用</li>
+</ul>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>3<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(<span class="string">'Hello'</span>,&#123;</span><br><span class="line">  template: <span class="string">''</span></span><br><span class="line">&#125;)</span><br><span class="line">     </span><br><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#app'</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(<span class="string">'Hello'</span>,&#123;</span><br><span class="line">  template: <span class="string">''</span></span><br><span class="line">&#125;)</span><br><span class="line">   </span><br><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#app'</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
 <p>template中的内容被当做一个整体了，并且template标签是不会解析到html结构中的</p>
-</li>
-<li><p>实例范围外使用</p>
+<ul>
+<li>实例范围外使用</li>
+</ul>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span>1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span>2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(<span class="string">'Hello'</span>,&#123;</span><br><span class="line">  template: <span class="string">''</span></span><br><span class="line">&#125;)</span><br><span class="line">     </span><br><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#app'</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(<span class="string">'Hello'</span>,&#123;</span><br><span class="line">  template: <span class="string">''</span></span><br><span class="line">&#125;)</span><br><span class="line">   </span><br><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#app'</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
 
 
-</li>
-</ul>
 </li>
 </ol>
-<pre><code>实例范围外template标签是不会被直接解析的
+<ul>
+<li>实例范围外template标签是不会被直接解析的</li>
+</ul>
+<ul>
+<li>组件要想使用template使用，我们在实例范围外使用。</li>
+</ul>
+   <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">hello</span>&gt;</span><span class="tag">&lt;/<span class="name">hello</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">id</span>=<span class="string">"hello"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span>1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span>2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-组件要想使用template使用，我们在实例范围外使用。
-
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">hello</span>&gt;</span><span class="tag">&lt;/<span class="name">hello</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">id</span>=<span class="string">"hello"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span>1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span>2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(<span class="string">'Hello'</span>,&#123;</span><br><span class="line">  template: <span class="string">'#hello'</span></span><br><span class="line">&#125;)</span><br><span class="line">     </span><br><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#app'</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+   <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(<span class="string">'Hello'</span>,&#123;</span><br><span class="line">  template: <span class="string">'#hello'</span></span><br><span class="line">&#125;)</span><br><span class="line">   </span><br><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#app'</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
 
 
-使用第二种  template  使用后，有个弊端，template  标签结构会在  html  文件中显示
+<ul>
+<li>使用第二种  template  使用后，有个弊端，template  标签结构会在  html  文件中显示</li>
+</ul>
+<ul>
+<li>使用  webpack 、gulp  等工具编译，将来要用  Vue  提供的单文件组件。</li>
+</ul>
 
-使用  webpack 、gulp  等工具编译，将来要用  Vue  提供的单文件组件。</code></pre>
       
     </div>
 
