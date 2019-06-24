@@ -1764,7 +1764,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #e4a3bd;
+  background: #c42ac4;
 }
 .feed-link,
 .chat {
@@ -2975,8 +2975,8 @@ a,
 span.exturl {
   color: #000;
 }
-.header-inner {
-  opacity: 0.5;
+.site-nav {
+  opacity: 1;
 }
 .site-meta {
   background: #0cc;
