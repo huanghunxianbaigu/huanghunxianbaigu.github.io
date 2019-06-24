@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.2" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.1.2',
+    sidebar: {"position":"left","display":"always","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Vue 有两大特性  1. 指令 - - 用来操作 DOM       2. 组件 - - 组件是 html css js 等的一个聚合体       3. 为什么要使用组件？      1. 组件化 * 将一个具备完整功能的项目的一部分进行多处使用          * 加快项目的进度          * 可以进行项目的复用                        2. 要想实现组件化，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue 组件">
+<meta property="og:url" content="http://yoursite.com/2019/06/24/Vue-组件/index.html">
+<meta property="og:site_name" content="黄昏现白骨">
+<meta property="og:description" content="Vue 有两大特性  1. 指令 - - 用来操作 DOM       2. 组件 - - 组件是 html css js 等的一个聚合体       3. 为什么要使用组件？      1. 组件化 * 将一个具备完整功能的项目的一部分进行多处使用          * 加快项目的进度          * 可以进行项目的复用                        2. 要想实现组件化，">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-06-24T11:08:10.251Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vue 组件">
+<meta name="twitter:description" content="Vue 有两大特性  1. 指令 - - 用来操作 DOM       2. 组件 - - 组件是 html css js 等的一个聚合体       3. 为什么要使用组件？      1. 组件化 * 将一个具备完整功能的项目的一部分进行多处使用          * 加快项目的进度          * 可以进行项目的复用                        2. 要想实现组件化，">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2019/06/24/Vue-组件/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Vue 组件 | 黄昏现白骨</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">黄昏现白骨</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/24/Vue-组件/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LuoXiaoRuo">
+      <meta itemprop="description" content="玲珑骰子安红豆，入骨相思知不知。">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="黄昏现白骨">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Vue 组件
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-06-24 16:34:47 / 修改时间：19:08:10" itemprop="dateCreated datePublished" datetime="2019-06-24T16:34:47+08:00">2019-06-24</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Vue-有两大特性"><a href="#Vue-有两大特性" class="headerlink" title="Vue 有两大特性"></a>Vue 有两大特性</h1><ol>
+<li><h2 id="指令-用来操作-DOM"><a href="#指令-用来操作-DOM" class="headerlink" title="指令 - -  用来操作 DOM"></a>指令 - -  用来操作 DOM</h2></li>
+<li><h2 id="组件-组件是-html-css-js-等的一个聚合体"><a href="#组件-组件是-html-css-js-等的一个聚合体" class="headerlink" title="组件 - -  组件是 html  css  js 等的一个聚合体"></a>组件 - -  组件是 html  css  js 等的一个聚合体</h2></li>
+<li><h2 id="为什么要使用组件？"><a href="#为什么要使用组件？" class="headerlink" title="为什么要使用组件？"></a>为什么要使用组件？</h2><ol>
+<li>组件化<ul>
+<li>将一个具备完整功能的项目的一部分进行多处使用</li>
+<li>加快项目的进度</li>
+<li>可以进行项目的复用</li>
+</ul>
+</li>
+<li>要想实现组件化，那么我们使用的这一部分必须是完整的，我们把这个完整的整体称之为组件</li>
+<li>插件：  index.html   img   css   js</li>
+<li>Vue  将  html  css  js  img  整合到一起，并将此聚合体称之为，单文件组件（ xx.vue ）</li>
+</ol>
+</li>
+<li><h2 id="基础的组件创建"><a href="#基础的组件创建" class="headerlink" title="基础的组件创建"></a>基础的组件创建</h2><ol>
+<li><p>命名</p>
+<p>一个单词的大写：注意不要与原生的  h5  标签重名，比如  header  footer  Header  Footer</p>
+<p>小写带 - ，比如  header-title  </p>
+<p>大驼峰：  FatherSon   使用 ：father-son</p>
+</li>
+<li><p>全局注册</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">Father</span>&gt;</span><span class="tag">&lt;/<span class="name">Father</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Hello = Vue.extend(&#123;</span><br><span class="line">  template: <span class="string">'&lt;div&gt; 这里是father组件 &lt;/div&gt;'</span></span><br><span class="line">&#125;)             <span class="comment">//VueComponent( option )  组件的名称，组件的配置项</span></span><br><span class="line">      </span><br><span class="line">Vue.component( <span class="string">'Father'</span>, Hello )</span><br><span class="line">      </span><br><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#app'</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+</li>
+</ol>
+<ol start="3">
+<li><p>局部注册</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">father-son</span>&gt;</span><span class="tag">&lt;/<span class="name">father-son</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">      </span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"root"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">father-son</span>&gt;</span><span class="tag">&lt;/<span class="name">father-son</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Hello = Vue.extend(&#123;</span><br><span class="line">  template: <span class="string">'&lt;div&gt; 这里是1903 &lt;/div&gt;'</span></span><br><span class="line">&#125;)</span><br><span class="line">      </span><br><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#app'</span>,</span><br><span class="line">  components: &#123;</span><br><span class="line">    <span class="comment">// key: value  key是组件名称   value是组件配置项</span></span><br><span class="line">    <span class="comment">// 'gabriel-yan': Hello,</span></span><br><span class="line">    <span class="string">'FatherSon'</span>: Hello</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line">      </span><br><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#root'</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>在组件中用一个components的配置项目来表示，只能在注册的范围内使用，其他地方是不能使用的</p>
+</li>
+</ol>
+<ol start="4">
+<li><p>全局注册与局部注册的简写形式</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">Father</span>&gt;</span><span class="tag">&lt;/<span class="name">Father</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">father-son</span>&gt;</span><span class="tag">&lt;/<span class="name">father-son</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(<span class="string">'Father'</span>,&#123;</span><br><span class="line">  template: <span class="string">'&lt;div&gt; 这里是全局注册 &lt;/div&gt;'</span></span><br><span class="line">&#125;)</span><br><span class="line">      </span><br><span class="line">      </span><br><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#app'</span>,</span><br><span class="line">  components: &#123;</span><br><span class="line">    <span class="string">'FatherSon'</span>: &#123;</span><br><span class="line">      template: <span class="string">'&lt;div&gt; 这里是局部注册 &lt;/div&gt;'</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>组件的嵌套</p>
+<ul>
+<li><p>父组件里面放子组件 - - - 类似于  dom  的父子级结构</p>
+</li>
+<li><p>将子组件以标签的形式放在父组件的模板中使用</p>
+</li>
+<li><p>切记！不要放在父组件的内容中。</p>
+</li>
+<li><p>组件不仅可以用双标签表示，也可以使用单标签表示</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 下面这种写法是错误的 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">Father</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Son</span>&gt;</span><span class="tag">&lt;/<span class="name">Son</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">Father</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 正确的应该是 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">Father</span>&gt;</span><span class="tag">&lt;/<span class="name">Father</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(<span class="string">'Father'</span>,&#123;</span><br><span class="line">  template: <span class="string">'&lt;div&gt; Father &lt;Son&gt;&lt;/Son&gt;&lt;/div&gt;'</span></span><br><span class="line">&#125;)</span><br><span class="line">        </span><br><span class="line">Vue.component(<span class="string">'Son'</span>,&#123;</span><br><span class="line">  template: <span class="string">'&lt;div&gt; son &lt;/div&gt;'</span></span><br><span class="line">&#125;)</span><br><span class="line">        </span><br><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#app'</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#app'</span>,</span><br><span class="line">  components: &#123;</span><br><span class="line">    <span class="string">'Father'</span>: &#123;</span><br><span class="line">      template: <span class="string">'&lt;div&gt; father组件 &lt;Son /&gt;&lt;/div&gt;'</span>,</span><br><span class="line">      components: &#123;</span><br><span class="line">        <span class="string">'Son'</span>: &#123;</span><br><span class="line">          template: <span class="string">'&lt;div&gt; son组件 &lt;/div&gt;'</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+</li>
+</ol>
+<ol start="5">
+<li><h2 id="掌握的组件内容"><a href="#掌握的组件内容" class="headerlink" title="掌握的组件内容"></a>掌握的组件内容</h2><ol>
+<li>Vue  是如何扩展组件的？</li>
+<li>Vue  为什么要以标签的形式使用组件</li>
+<li>组件使用为何要注册</li>
+</ol>
+</li>
+<li><h2 id="组件的特殊使用规则-（-is-规则）"><a href="#组件的特殊使用规则-（-is-规则）" class="headerlink" title="组件的特殊使用规则 （  is  规则）"></a>组件的特殊使用规则 （  is  规则）</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">table</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">td</span>&gt;</span>1<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">td</span>&gt;</span>2<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">td</span>&gt;</span>3<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tr</span> <span class="attr">is</span> = <span class="string">"Hello"</span>&gt;</span><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>   ul&gt;li   ol&gt;li   table&gt;tr&gt;td   select&gt;option</p>
+<p>如上直属父子级如果直接组件以标签化形式使用，那么就会出现bug</p>
+<p>使用is规则: 通过is属性来绑定一个组件   <figure class="highlight plain"><figcaption><span>is </span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">```javascript</span><br><span class="line">  Vue.component(&apos;Hello&apos;,&#123;</span><br><span class="line">    template: &apos;&lt;tr&gt; &lt;td&gt; 4 &lt;/td&gt; &lt;td&gt; 5 &lt;/td&gt;&lt;td&gt; 6 &lt;/td&gt;&lt;/tr&gt;&apos;</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  new Vue(&#123;</span><br><span class="line">    el: &apos;#app&apos;</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure></p>
+</li>
+</ol>
+<ol start="7">
+<li><h2 id="组件的-template"><a href="#组件的-template" class="headerlink" title="组件的  template"></a>组件的  template</h2><h3 id="template-使用"><a href="#template-使用" class="headerlink" title="template  使用"></a>template  使用</h3><ul>
+<li><p>实例范围内使用</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>3<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(<span class="string">'Hello'</span>,&#123;</span><br><span class="line">  template: <span class="string">''</span></span><br><span class="line">&#125;)</span><br><span class="line">     </span><br><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#app'</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>template中的内容被当做一个整体了，并且template标签是不会解析到html结构中的</p>
+</li>
+<li><p>实例范围外使用</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span>1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span>2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(<span class="string">'Hello'</span>,&#123;</span><br><span class="line">  template: <span class="string">''</span></span><br><span class="line">&#125;)</span><br><span class="line">     </span><br><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#app'</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+</li>
+</ol>
+<pre><code>实例范围外template标签是不会被直接解析的
+
+组件要想使用template使用，我们在实例范围外使用。
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;app&quot;&gt;</span><br><span class="line">	&lt;hello&gt;&lt;/hello&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;template id=&quot;hello&quot;&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;ul&gt;</span><br><span class="line">      &lt;li&gt;1&lt;/li&gt;</span><br><span class="line">      &lt;li&gt;2&lt;/li&gt;</span><br><span class="line">    &lt;/ul&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(<span class="string">'Hello'</span>,&#123;</span><br><span class="line">  template: <span class="string">'#hello'</span></span><br><span class="line">&#125;)</span><br><span class="line">     </span><br><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#app'</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+使用第二种  template  使用后，有个弊端，template  标签结构会在  html  文件中显示
+
+使用  webpack 、gulp  等工具编译，将来要用  Vue  提供的单文件组件。</code></pre>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/24/虚拟DOM与diff算法/" rel="next" title="虚拟DOM与diff算法">
+                <i class="fa fa-chevron-left"></i> 虚拟DOM与diff算法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="LuoXiaoRuo">
+            
+              <p class="site-author-name" itemprop="name">LuoXiaoRuo</p>
+              <div class="site-description motion-element" itemprop="description">玲珑骰子安红豆，入骨相思知不知。</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Vue-有两大特性"><span class="nav-number">1.</span> <span class="nav-text">Vue 有两大特性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#指令-用来操作-DOM"><span class="nav-number">1.1.</span> <span class="nav-text">指令 - -  用来操作 DOM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组件-组件是-html-css-js-等的一个聚合体"><span class="nav-number">1.2.</span> <span class="nav-text">组件 - -  组件是 html  css  js 等的一个聚合体</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么要使用组件？"><span class="nav-number">1.3.</span> <span class="nav-text">为什么要使用组件？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基础的组件创建"><span class="nav-number">1.4.</span> <span class="nav-text">基础的组件创建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#掌握的组件内容"><span class="nav-number">1.5.</span> <span class="nav-text">掌握的组件内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组件的特殊使用规则-（-is-规则）"><span class="nav-number">1.6.</span> <span class="nav-text">组件的特殊使用规则 （  is  规则）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组件的-template"><span class="nav-number">1.7.</span> <span class="nav-text">组件的  template</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#template-使用"><span class="nav-number">1.7.1.</span> <span class="nav-text">template  使用</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019-06 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LuoXiaoRuo</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.2</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="0,0,255" opacity="1" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.2"></script>
+
+  <script src="/js/motion.js?v=7.1.2"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.2"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.2"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.2"></script>
+<script src="/js/post-details.js?v=7.1.2"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.2"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
