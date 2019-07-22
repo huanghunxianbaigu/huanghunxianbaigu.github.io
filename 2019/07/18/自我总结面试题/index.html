@@ -101,7 +101,7 @@
 <meta property="og:site_name" content="黄昏现白骨">
 <meta property="og:description" content="一.原生Js基础 掌握情况——非常重要 基本数据类型和引用数据类型的区别  * js 分为两种数据类型：         * 基本数据类型：Number、String、Boolean、Null、 Undefined、Symbol（ES6），这些类型可以直接操作保存在变量中的实际值。     * 引用数据类型：Object （ 在 js 中除了基本数据类型以外都是对象，数据是对象，函数时对象，正则表">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-22T08:59:54.257Z">
+<meta property="og:updated_time" content="2019-07-22T09:06:17.836Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="黄昏现白骨">
 <meta name="twitter:description" content="一.原生Js基础 掌握情况——非常重要 基本数据类型和引用数据类型的区别  * js 分为两种数据类型：         * 基本数据类型：Number、String、Boolean、Null、 Undefined、Symbol（ES6），这些类型可以直接操作保存在变量中的实际值。     * 引用数据类型：Object （ 在 js 中除了基本数据类型以外都是对象，数据是对象，函数时对象，正则表">
@@ -427,7 +427,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-22 16:59:54" itemprop="dateModified" datetime="2019-07-22T16:59:54+08:00">2019-07-22</time>
+                <time title="修改时间：2019-07-22 17:06:17" itemprop="dateModified" datetime="2019-07-22T17:06:17+08:00">2019-07-22</time>
               
             
           </span>
@@ -548,10 +548,12 @@
 <li><p>slice()和concat()都并非深拷贝</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 对只有一级属性值的数组对象使用slice</span></span><br><span class="line">  <span class="keyword">var</span> a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>];</span><br><span class="line">  <span class="keyword">var</span> b = a.slice();</span><br><span class="line">  b[<span class="number">0</span>] = <span class="number">2</span>;</span><br><span class="line">  alert(a); <span class="comment">// 1,2,3,4</span></span><br><span class="line">  alert(b); <span class="comment">// 2,2,3,4</span></span><br></pre></td></tr></table></figure>
 
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 对有多层属性的数组对象使用slice</span></span><br><span class="line">  <span class="keyword">var</span> a = [<span class="number">1</span>,[<span class="number">1</span>,<span class="number">2</span>],<span class="number">3</span>,<span class="number">4</span>];</span><br><span class="line">  <span class="keyword">var</span> b = a.slice();</span><br><span class="line">  b[<span class="number">1</span>][<span class="number">0</span>] = <span class="number">2</span>;</span><br><span class="line">  alert(a); <span class="comment">// 1,2,2,3,4</span></span><br><span class="line">  alert(b); <span class="comment">// 1,2,2,3,4</span></span><br></pre></td></tr></table></figure>
+
 
 </li>
 </ul>
-<pre><code><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 对有多层属性的数组对象使用slice</span></span><br><span class="line">  <span class="keyword">var</span> a = [<span class="number">1</span>,[<span class="number">1</span>,<span class="number">2</span>],<span class="number">3</span>,<span class="number">4</span>];</span><br><span class="line">  <span class="keyword">var</span> b = a.slice();</span><br><span class="line">  b[<span class="number">1</span>][<span class="number">0</span>] = <span class="number">2</span>;</span><br><span class="line">  alert(a); <span class="comment">// 1,2,2,3,4</span></span><br><span class="line">  alert(b); <span class="comment">// 1,2,2,3,4</span></span><br></pre></td></tr></table></figure></code></pre><ul>
+<ul>
 <li>参考资料：<a href="https://www.jianshu.com/p/cf1e9d7e94fb及https://www.cnblogs.com/echolun/p/7889848.html" target="_blank" rel="noopener">https://www.jianshu.com/p/cf1e9d7e94fb及https://www.cnblogs.com/echolun/p/7889848.html</a></li>
 </ul>
 <h3 id="实现继承的几种方式及工作原理"><a href="#实现继承的几种方式及工作原理" class="headerlink" title="实现继承的几种方式及工作原理"></a>实现继承的几种方式及工作原理</h3><p>js 继承的实现方式</p>
