@@ -101,10 +101,14 @@
 <meta property="og:site_name" content="黄昏现白骨">
 <meta property="og:description" content="一.原生Js基础 掌握情况——非常重要 基本数据类型和引用数据类型的区别  * js 分为两种数据类型：         * 基本数据类型：Number、String、Boolean、Null、 Undefined、Symbol（ES6），这些类型可以直接操作保存在变量中的实际值。     * 引用数据类型：Object （ 在 js 中除了基本数据类型以外都是对象，数据是对象，函数时对象，正则表">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-22T09:08:48.279Z">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3174701-2dd95188a8f6b19e?imageMogr2/auto-orient/strip%7CimageView2/2/w/467/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3174701-9a3de0b501161c07?imageMogr2/auto-orient/strip%7CimageView2/2/w/530/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3174701-18a76d28c0a9ea1b?imageMogr2/auto-orient/strip%7CimageView2/2/w/521/format/webp">
+<meta property="og:updated_time" content="2019-08-07T03:06:15.445Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="黄昏现白骨">
 <meta name="twitter:description" content="一.原生Js基础 掌握情况——非常重要 基本数据类型和引用数据类型的区别  * js 分为两种数据类型：         * 基本数据类型：Number、String、Boolean、Null、 Undefined、Symbol（ES6），这些类型可以直接操作保存在变量中的实际值。     * 引用数据类型：Object （ 在 js 中除了基本数据类型以外都是对象，数据是对象，函数时对象，正则表">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/3174701-2dd95188a8f6b19e?imageMogr2/auto-orient/strip%7CimageView2/2/w/467/format/webp">
 
 
 
@@ -427,7 +431,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-22 17:08:48" itemprop="dateModified" datetime="2019-07-22T17:08:48+08:00">2019-07-22</time>
+                <time title="修改时间：2019-08-07 11:06:15" itemprop="dateModified" datetime="2019-08-07T11:06:15+08:00">2019-08-07</time>
               
             
           </span>
@@ -734,7 +738,7 @@
 </li>
 <li><p>this 指的是直接调用当前方法（函数）的那个对象，也就是说函数在谁那被调用，this 就指向谁</p>
 </li>
-<li><p>当函数里嵌套函数的时候，嵌套的那个函数的里面的 this 指向 window</p>
+<li><p>当函数里嵌套函数的时候，外层函数的里面的 this 指向 window</p>
 </li>
 <li><p>在全局环境使用 this ，它指的就是顶层的对象 window</p>
 </li>
@@ -783,7 +787,274 @@
 <li><p>参考资料 <a href="https://www.jianshu.com/p/8d357981dedb" target="_blank" rel="noopener">https://www.jianshu.com/p/8d357981dedb</a>  /  <a href="https://blog.csdn.net/lizhengxv/article/details/84639342" target="_blank" rel="noopener">https://blog.csdn.net/lizhengxv/article/details/84639342</a>  /  <a href="https://www.jianshu.com/p/9b91f3df05b6" target="_blank" rel="noopener">https://www.jianshu.com/p/9b91f3df05b6</a>  /  <a href="https://www.cnblogs.com/hjson/archive/2019/01/11/10254555.html" target="_blank" rel="noopener">https://www.cnblogs.com/hjson/archive/2019/01/11/10254555.html</a> （最好）  /  <a href="https://baijiahao.baidu.com/s?id=1617122883116378490&amp;wfr=spider&amp;for=pc" target="_blank" rel="noopener">https://baijiahao.baidu.com/s?id=1617122883116378490&amp;wfr=spider&amp;for=pc</a></p>
 </li>
 </ul>
-<h3 id="事件冒泡的三个阶段-如何阻止"><a href="#事件冒泡的三个阶段-如何阻止" class="headerlink" title="事件冒泡的三个阶段  如何阻止"></a>事件冒泡的三个阶段  如何阻止</h3><ul>
+<h3 id="事件冒泡的三个阶段-如何阻止"><a href="#事件冒泡的三个阶段-如何阻止" class="headerlink" title="事件冒泡的三个阶段  如何阻止"></a>事件冒泡的三个阶段  如何阻止</h3><p><strong>事件冒泡的三个阶段</strong></p>
+<ul>
+<li>当一个 DOM 事件被触发时，它不仅仅只是单纯的在本身对象上触发一次，而是会经历三个不同的阶段</li>
+<li><strong>捕获阶段：</strong>先由文档的根节点 document 往事件触发对象，从外向内捕获事件对象；</li>
+<li><strong>目标阶段：</strong>到达目标事件位置（事发地），触发事件；</li>
+<li><strong>冒泡阶段：</strong>再从目标事件位置往文档根节点方向回溯，从内向外冒泡时间2对象；</li>
+</ul>
+<p><strong>阻止事件冒泡的方法</strong>   </p>
+<ul>
+<li>在除 IE 以外的其他浏览器中通过 e.stopPropagation() 方式防止事件的冒泡，在支持该方法的浏览器中还有一个方法 stopimmediatePropagation() ，该方法不仅会阻止事件像祖元素冒泡，同时也会阻止同一个节点上同一个时间的其他事件处理程序的执行，该方法比前者阻止的更彻底</li>
+<li>在 IE 浏览器中通过 e.cancleBunnle = true ，阻止事件冒泡</li>
+</ul>
+<p><strong>阻止事件的默认行为</strong></p>
+<ul>
+<li>在 IE 浏览器中通过 e.returnValue = false;</li>
+<li>在其他浏览器中调用方法 e.preventDefault();</li>
+<li>在 jQuery 中通过在事件回溯利用 return false （其实质利用了上面的两种方式）实现阻止事件的默认行为</li>
+</ul>
+<h2 id="ajax的作用-使用步骤-对比-fetch-axios"><a href="#ajax的作用-使用步骤-对比-fetch-axios" class="headerlink" title="ajax的作用 使用步骤 对比 fetch axios"></a>ajax的作用 使用步骤 对比 fetch axios</h2><ul>
+<li><p><strong>什么是 ajax ？</strong></p>
+<ul>
+<li>AJAX = Asynchronous JavaScript and XML（异步的 JavaScript 和 XML）</li>
+<li>AJAX 不是新的编程语言，而是一种使用现有标准的新方法。</li>
+<li>AJAX 是与服务器交换数据并更新部分网页的艺术，在不重新加载整个页面的情况下。</li>
+</ul>
+</li>
+<li><p><strong>ajax 使用步骤</strong></p>
+<ol>
+<li>创建 XMLHttpRequest () 对象，<code>var xmlhttp = new XMLHttpRequest ()</code>， XMLHttpRequest 对象用来和服务器交换数据。</li>
+<li>使用 XMLHttpRequest 对象的 open() 和 send() 方法发送资源请求给服务器。<ol>
+<li>xml.open ( method , url , async ) method包括 get 和 post ，url 主要是文件或资源的路径，async 参数为 true （代表异步）或者 false （代表同步）</li>
+<li>xhttp.send() 使用 get 方法发送请求到服务器。</li>
+<li>async=true 当服务器准备响应时将执行 onreadystatechange 函数</li>
+<li>asyn=false 则将不需要写 onreadystatechange 函数，直接在send后面写上执行代码</li>
+<li>xhttp.send( string ) 使用 post 方法发送请求到服务器。</li>
+<li>post 发送请求什么时候能够使用？<ul>
+<li>更新一个文件或者数据库的时候</li>
+<li>发送大量数据到服务器，因为 post 请求没有字符限制。</li>
+<li>发送用户输入的加密数据。</li>
+</ul>
+</li>
+<li>post表单数据需要使用 XMLHttpRequest 对象的 setRequestHeader 方法增加一个HTTP头。</li>
+</ol>
+</li>
+<li>使用 XMLHttpRequest 对象的 response Text （获取服务器响应的字符串数据）或 responseXML （获取服务器响应的 XML 数据）属性获得服务器的响应。</li>
+<li>onreadystatechange  函数，当发送请求到服务器，想要服务器响应执行一些功能就需要使用 onreadystatechange 函数，每次 XMLHttpRequest 对象的 readyState 发生改变都会触发 onreadystatechange 函数。</li>
+<li>onreadystatechange属性存储一个当readyState发生改变时自动被调用的函数。 <ul>
+<li>readyState属性，XMLHttpRequest对象的状态，改变从0到4，0代表请求未被初始化，1代表服务器连接成功，2请求被服务器接收，3处理请求，4请求完成并且响应准备。 </li>
+<li>status属性，200表示成功响应，404表示页面不存在。在onreadystatechange事件中，服务器响应准备的时候发生，当readyState==4和status==200的时候服务器响应准备。</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p><strong>jQuery ajax</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">$.ajax(&#123;</span><br><span class="line">   type: <span class="string">'POST'</span>,</span><br><span class="line">   url: url,</span><br><span class="line">   data: data,</span><br><span class="line">   dataType: dataType,</span><br><span class="line">   success: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;,</span><br><span class="line">   error: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p><strong>优缺点：</strong></p>
+<ul>
+<li>本身是针对 MVC 的编程，不符合现在前端 MVVM 的浪潮</li>
+<li>基于原生 XHR 开发， XHR 本身的架构不清晰，已经有了 fetch 的代替方案。</li>
+<li>jQuery 整个项目太大，单纯使用 ajax 却要引入整个 jQuery 非常的不合理（采用个性化打包的方案又不能享受 CDN 服务）</li>
+</ul>
+</li>
+<li><p><strong>axios</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">axios(&#123;</span><br><span class="line">    method: <span class="string">'post'</span>,</span><br><span class="line">    url: <span class="string">'/user/12345'</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">        firstName: <span class="string">'Fred'</span>,</span><br><span class="line">        lastName: <span class="string">'Flintstone'</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line">.then(<span class="function"><span class="keyword">function</span> (<span class="params">response</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(response);</span><br><span class="line">&#125;)</span><br><span class="line">.catch(<span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(error);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p><strong>优缺点：</strong></p>
+<ul>
+<li>从 node.js 创建 http 请求</li>
+<li>支持 Promise API</li>
+<li>客户端支持防止 CSRF</li>
+<li><strong>提供了一些并发请求的接口</strong></li>
+</ul>
+</li>
+<li><p><strong>fetch</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> response = <span class="keyword">await</span> fetch(url);</span><br><span class="line">  <span class="keyword">let</span> data = response.json();</span><br><span class="line">  <span class="built_in">console</span>.log(data);</span><br><span class="line">&#125; <span class="keyword">catch</span>(e) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"Oops, error"</span>, e);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>优缺点：</strong></p>
+<ul>
+<li>符合关注分离，没有将输入，输出和用事件来跟踪的状态混杂在一个对象里</li>
+<li>更好更方便的写法</li>
+<li>更加底层，提供的 API 丰富（ request , response ）</li>
+<li>脱离了 XHR 是ES规范里新的实现方式</li>
+</ul>
+<p><strong>对比fetch</strong></p>
+<ul>
+<li>fetch 只对网络请求报错，对 400 ， 500 都当做成功的请求，需要封装处理</li>
+<li>fetch 默认不会带 cookie ，需要添加配置项</li>
+<li>fetch 不支持 abort ，不支持超时控制，使用 setTimeOut 及 Promise.reject 的实现的超时控制并不能阻止，请求过程继续在后台运行，造成了量的浪费</li>
+<li>fetch 没有办法原生监测请求的进度，而 XHR 可以</li>
+</ul>
+</li>
+<li><p><strong>为什么要用axios？</strong></p>
+<ul>
+<li>从浏览器中创建 XHLHttpRequest</li>
+<li>从 node.js 发出 http 请求</li>
+<li>支持 Promise API</li>
+<li>拦截请求和响应</li>
+<li>转换请求和响应数据</li>
+<li>取消请求</li>
+<li>自动转换 JSON 数据</li>
+<li>客户端支持防止 CSRF / XSRF</li>
+</ul>
+</li>
+<li><p>参考资料：<a href="https://blog.csdn.net/weixin_34283445/article/details/91474962" target="_blank" rel="noopener">https://blog.csdn.net/weixin_34283445/article/details/91474962</a> 及 <a href="https://blog.csdn.net/twodogya/article/details/80223508" target="_blank" rel="noopener">https://blog.csdn.net/twodogya/article/details/80223508</a></p>
+</li>
+</ul>
+<h2 id="数组的增删改查操作-排序-乱序-去重"><a href="#数组的增删改查操作-排序-乱序-去重" class="headerlink" title="数组的增删改查操作 排序 乱序 去重"></a>数组的增删改查操作 排序 乱序 去重</h2><ul>
+<li><p>添加（ push() , unshift()）</p>
+<ul>
+<li>push()  向数组的末尾添加一个或更多元素，并返回新的长度</li>
+<li>unshift() 向数组的开头添加一个或更多元素，并返回新的长度</li>
+</ul>
+</li>
+<li><p>删除（ pop() , shift() , splice( index , howmany )）</p>
+<ul>
+<li>pop() 删除数组的最后一项，数组长度 -1 ，返回删除的项。</li>
+<li>shift() 删除数组的第一项，并返回删除的项，数组长度 -1.</li>
+<li>splice( index , howmany )<ul>
+<li>index 整数，规定删除值的位置，使用负数可以从数组结尾处规定位置</li>
+<li>howmany 要删除的值数量，如果设置为 0 ，则不会删除值</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>修改（ splice( index , howmany , item1 , … , itemX )）</p>
+<ul>
+<li>index 整数，规定添加删除 / 的位置，使用负数可从数组的结尾处规定位置。</li>
+<li>howmany 要删除的值目数量。如果设置为 0 ，则不会删除数组。</li>
+<li>item1 , … , itemX 向数组添加的值</li>
+</ul>
+</li>
+<li><p>查询（ slice( start , end ) , indexOf( item , start ) ）</p>
+<ul>
+<li>start 必需 指定从什么位置开始，使用负数可从数组结尾处开始。</li>
+<li>end 可选 指定到什么位置结束，如果未指定该参数，则从开始位置一直到结束。</li>
+</ul>
+</li>
+<li><p>排序（ sort( sortby )）</p>
+<ul>
+<li><p>sortby 可选 规定排列顺序，必须是函数。</p>
+</li>
+<li><p>如果按照该方法时没有使用参数，将按字母顺序对数组中的元素进行排序，说的更精确点，是按照字符编码的顺序进行排序，要实现这一点，首先应把数组的元素都转换成字符串（如有必要），以便进行比较。</p>
+</li>
+<li><p>如果想按照其他标准进行排序，需要提供比较函数，该函数比较两个值，然后返回一个用于说明这两个值相对顺序的数字，比较函数应该具有两个参数 a 和 b ，其返回值如下</p>
+<ul>
+<li>若 a &lt; b ，在排序后的数组中 a 应该出现在 b 之前，则返回一个小于 0 的值</li>
+<li>若 a = b ，则返回 0 </li>
+<li>若 a &gt; b ，则返回一个大于 0 的值</li>
+</ul>
+</li>
+<li><p>对数字数组进行由大到小的顺序进行排序</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">22</span>,<span class="number">12</span>,<span class="number">3</span>,<span class="number">43</span>,<span class="number">56</span>,<span class="number">47</span>,<span class="number">4</span>];</span><br><span class="line">arr.sort();</span><br><span class="line"><span class="built_in">console</span>.log(arr); <span class="comment">// [12, 22, 3, 4, 43, 47, 56]</span></span><br><span class="line">arr.sort(<span class="function"><span class="keyword">function</span> (<span class="params">m, n</span>) </span>&#123;</span><br><span class="line"> <span class="keyword">if</span> (m &lt; n) <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line"> <span class="keyword">else</span> <span class="keyword">if</span> (m &gt; n) <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line"> <span class="keyword">else</span> <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(arr); <span class="comment">// [3, 4, 12, 22, 43, 47, 56]</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>对字符串数组执行不区分大小写的字母表排序</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="string">'abc'</span>, <span class="string">'Def'</span>, <span class="string">'BoC'</span>, <span class="string">'FED'</span>];</span><br><span class="line"><span class="built_in">console</span>.log(arr.sort()); <span class="comment">// ["BoC", "Def", "FED", "abc"]</span></span><br><span class="line"><span class="built_in">console</span>.log(arr.sort(<span class="function"><span class="keyword">function</span>(<span class="params">s, t</span>)</span>&#123;</span><br><span class="line"> <span class="keyword">var</span> a = s.toLowerCase();</span><br><span class="line"> <span class="keyword">var</span> b = t.toLowerCase();</span><br><span class="line"> <span class="keyword">if</span> (a &lt; b) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line"> <span class="keyword">if</span> (a &gt; b) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line"> <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;)); <span class="comment">// ["abc", "BoC", "Def", "FED"]</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>对包含对象的数组排序，要求根据对象的年龄进行由大到小排列</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [&#123;<span class="string">'name'</span>: <span class="string">'张三'</span>, <span class="attr">age</span>: <span class="number">26</span>&#125;,&#123;<span class="string">'name'</span>: <span class="string">'李四'</span>, <span class="attr">age</span>: <span class="number">12</span>&#125;,&#123;<span class="string">'name'</span>: <span class="string">'王五'</span>, <span class="attr">age</span>: <span class="number">37</span>&#125;,&#123;<span class="string">'name'</span>: <span class="string">'赵六'</span>, <span class="attr">age</span>: <span class="number">4</span>&#125;];</span><br><span class="line"><span class="keyword">var</span> objectArraySort = <span class="function"><span class="keyword">function</span> (<span class="params">keyName</span>) </span>&#123;</span><br><span class="line"> <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">objectN, objectM</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> valueN = objectN[keyName]</span><br><span class="line">  <span class="keyword">var</span> valueM = objectM[keyName]</span><br><span class="line">  <span class="keyword">if</span> (valueN &lt; valueM) <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">if</span> (valueN &gt; valueM) <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br><span class="line">arr.sort(objectArraySort(<span class="string">'age'</span>))</span><br><span class="line"><span class="built_in">console</span>.log(arr) <span class="comment">// [&#123;'name': '王五', age: 37&#125;,&#123;'name': '张三', age: 26&#125;,&#123;'name': '李四', age: 12&#125;,&#123;'name': '赵六', age: 4&#125;]</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>乱序</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 数组乱序 */</span></span><br><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>];</span><br><span class="line"><span class="comment">/* 每次循环时都要与第i项互换位置 */</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">	<span class="comment">/* 获取一个0-5的随机数 */</span></span><br><span class="line">    <span class="keyword">var</span> j = <span class="built_in">parseInt</span>(<span class="built_in">Math</span>.random() * arr.length);</span><br><span class="line">    <span class="comment">/* 将所获取的数和第i个数互换位置 */</span></span><br><span class="line">    <span class="keyword">var</span> temp = arr[i];</span><br><span class="line">    arr[i] = arr[j];</span><br><span class="line">    arr[j] = temp;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(arr);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>去重（）</p>
+<p><a href="https://www.cnblogs.com/wisewrong/p/9642264.html" target="_blank" rel="noopener">https://www.cnblogs.com/wisewrong/p/9642264.html</a></p>
+</li>
+</ul>
+<h2 id="原形-原型链-的理解"><a href="#原形-原型链-的理解" class="headerlink" title="原形 原型链 的理解"></a>原形 原型链 的理解</h2><ul>
+<li><p>构造函数</p>
+<p><strong>构造函数模式的目的就是为了创建一个自定义类，并且创建这个类的实例。构造函数模式中拥有了类和实例的概念，并且实例和实例之间是相互独立的，即实例识别</strong>。</p>
+<p>构造函数就是一个普通的函数，创建方式和普通函数没有区别，<strong>不同的是构造函数习惯首字母大写</strong>，另外就是调用方式不同，普通函数是直接调用，<strong>而构造函数需要使用new关键字来调用</strong>。</p>
+</li>
+<li><p>原型</p>
+<p><strong>在JavaScript中，每当定义一个函数数据类型（普通函数，类）的时候，都会天生自带一个prototype属性，这个属性指向函数的原型对象，并且这个属性是一个对象数据类型的值。</strong></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/3174701-2dd95188a8f6b19e?imageMogr2/auto-orient/strip%7CimageView2/2/w/467/format/webp" alt="img"></p>
+<p>原型对象就相当于一个公共的区域，所有同一个类型的实例都可以访问到这个原型对象，我们可以将对象中共有的内容，统一设置到原型对象中。</p>
+</li>
+<li><p><code>__proto__</code>和<code>constructor</code></p>
+<p>每一个对象数据类型（普通的对象，实例，prototype….）也天生自带一个属性<code>__proto__</code>，属性值是当前实例所属类的原型（prototype）。原型对象中有一个属性<code>constructor</code>，它指向函数对象。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/3174701-9a3de0b501161c07?imageMogr2/auto-orient/strip%7CimageView2/2/w/530/format/webp" alt="img"></p>
+</li>
+<li><p>何为原型链</p>
+<p><strong>在JavaScript中万物都是对象，对象和对象之间也有关系，并不是孤立存在的，对象之间的继承关系，在JavaScript中是通过Protype对象指向父类对象，直接指向Object对象为止，这样就形成了一个原型指向的链条，专业术语称之为原型链。</strong></p>
+<p>举例说明：person =&gt; Preson =&gt; Object 普通人类继承人类，人类继承对象类</p>
+<p><strong>当我们访问对象的一个属性和方法时，它会先在对象自身中寻找，如果有则直接使用，如果没有则会去原型对象中寻找，如果找到则直接使用，如果没有则去原型的原型中寻找，直到找到Object对象的原型，Object对象的原型没有原型，如果在Object原型中依然没有找到则返回underfined。</strong></p>
+<p>使用对象的hasOwnProperty()来检查对象自身中是否含有该属性；使用in检查对象中是否含有某个属性时，如果对象中没有但是原型中有也会返回true。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">Person.prototype.a = <span class="number">123</span>;</span><br><span class="line">Person.prototype.sayHello = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  alert(<span class="string">"hello"</span>);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> person = <span class="keyword">new</span> Person()</span><br><span class="line"><span class="built_in">console</span>.log(person.a)<span class="comment">//123</span></span><br><span class="line"><span class="built_in">console</span>.log(person.hasOwnProperty(<span class="string">'a'</span>));<span class="comment">//false</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'a'</span><span class="keyword">in</span> person)<span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>Object是JS中所有对象数据类型的基类（最顶层的类）在Object.prototype上没有<code>__proto__</code>这个属性</strong></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/3174701-18a76d28c0a9ea1b?imageMogr2/auto-orient/strip%7CimageView2/2/w/521/format/webp" alt="img"></p>
+</li>
+<li><p>参考资料：<a href="https://www.jianshu.com/p/ddaa5179cda6" target="_blank" rel="noopener">https://www.jianshu.com/p/ddaa5179cda6</a></p>
+</li>
+</ul>
+<h2 id="ES6的新特性"><a href="#ES6的新特性" class="headerlink" title="ES6的新特性"></a>ES6的新特性</h2><ul>
+<li><p>let、const、var的区别（上文有）</p>
+</li>
+<li><p>箭头函数</p>
+<p>普通函数可以是<strong>函数声明</strong>或者<strong>函数表达式</strong>，但是箭头函数始终都是<strong>表达式</strong>，全程是<strong>箭头函数表达式</strong>，因此仅在表达式有效时才能使用，包括：</p>
+<ul>
+<li>存储在变量中</li>
+<li>当做参数传递给函数</li>
+<li>存储在对象的属性中</li>
+</ul>
+<p>一般箭头函数都只有一个表达式作为函数主体：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> upperizedNames = [<span class="string">'Farrin'</span>, <span class="string">'Kagure'</span>, <span class="string">'Asser'</span>].map(</span><br><span class="line">  name =&gt; name.toUpperCase()</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p>这种函数表达式形式称为<strong>简写主体语法</strong>：</p>
+<ul>
+<li>在函数主体周围没有花括号</li>
+<li>自动返回表达式</li>
+</ul>
+<p>箭头函数的主体内需要多行代码，则需要使用<strong>常规主体语法</strong>：</p>
+<ul>
+<li>将函数主体放在花括号内</li>
+<li>需要使用return语句来返回内容</li>
+</ul>
+</li>
+<li><p>解构赋值</p>
+<p><strong>es6允许按照一定的模式，从数组或对象中提取值，给变量进行赋值，称之为解构赋值</strong></p>
+<p><strong>解构赋值的特点：</strong></p>
+<ul>
+<li>给变量赋值</li>
+<li>值的来源是对象或数组</li>
+<li>规则：按一定的模式</li>
+<li>一般用在数据交互，ajax请求数据。</li>
+</ul>
+</li>
+<li><p>Promise</p>
+<p><strong>Promise是异步编程的一种解决方案，其实是一个构造函数，自身有all、reject、resolve这几个方法，原型上有thecatch等方法</strong></p>
+<p><strong>Promise对象有以下两个特点</strong></p>
+<ul>
+<li>对象的状态不受外界影响，Promise对象代表一个异步操作，有三种状态：pending（进行中）、fulfilled（已成功）和rejected（已失败）。只有异步操作的结果，可以决定当前是哪一种状态，任何其他操作都无法改变这个状态。这也是Promise这个名字的由来，它的英语意思就是“承诺”，表示其他手段无法改变</li>
+<li>一旦改变状态，就不会再变，任何时候都可以得到这个结果。Promise对象的状态改变，只有两种可能：从pending变为fulfilled和从pending变为rejected。只要这两种情况发送，状态就凝固了，不会再变了，会一直保持这个结果，这时就称为resolved（已定型）。如果改变已经发生了，你再对Promise对象添加回调函数，也会立即得到这个结果。这与事件（Event）完全不同，事件的特点是，如果你错过了它，再去监听，是得不到结果的。</li>
+<li><a href="https://blog.csdn.net/qq_34645412/article/details/81170576" target="_blank" rel="noopener">https://blog.csdn.net/qq_34645412/article/details/81170576</a></li>
+</ul>
+</li>
+<li><p>函数默认参数</p>
+<p>在ES6中，可以为函数的参数指定默认值，<strong>函数默认参数允许在没有值或underfined被传入时使用默认形参</strong></p>
+<p><strong>默认参数使用注意点：</strong></p>
+<ul>
+<li>参数变量是默认声明的，不能用let或const再次声明</li>
+<li>使用默认参数值时，函数不能有同名参数</li>
+<li>显式传入underfined或不传值时使用函数默认参数值；传入<code>&#39;&#39;</code>或<code>null</code>时使用传入的参数值</li>
+<li><strong>参数默认值不是传值的，而是在函数被调用时，参数默认值才会被解析</strong></li>
+<li>位置在前的默认参数可用于后面的默认参数</li>
+<li><strong>定义了默认参数，应该是函数的尾参数</strong>，因为这样比较容易看出来，到底省略了哪些参数，如果非尾部的参数设置默认值，实际上这个参数是没法省略的。</li>
+<li>指定了默认值以后，函数的length属性，将返回没有指定默认值的参数个数，如果设置了默认值的参数不是尾参数，那么length属性也不在计入后面的参数了，后文的rest参数也不会计入length属性。</li>
+</ul>
+</li>
+<li><p>剩余（rest）参数</p>
+<p><strong>ES6引入rest参数（形式为…变量名），用于获取函数的多余参数，这样就不需要使用arguments对象了，rest参数搭配的变量是一个数组，该变量将对于的参数放入数组中。</strong></p>
+<p><strong>rest参数使用注意点：</strong></p>
+<ul>
+<li>rest参数之后不能再有其他参数（即只能是最后一个参数），否则会报错。</li>
+<li>函数的length属性，不包括rest参数</li>
+<li>rest参数可以被结构，这意味着他们的数据可以被解包到不同的变量中</li>
+</ul>
+<p>rest参数和arguments对象的区别</p>
+<ul>
+<li>rest参数只包含那些没有对应形参的实参，而arguments对象包含了传给函数的所有实参</li>
+<li>arguments对象不是一个真正的数组，而rest参数是真正的Array实例，也就是说你能够在它上面直接使用所有的数组方法，比如sort，map，forEach或pop…</li>
+<li>arguments对象还有一些附加的属性（如callee属性）</li>
+</ul>
+<p>默认参数参考资料：<a href="https://www.jianshu.com/p/9078fdffd810" target="_blank" rel="noopener">https://www.jianshu.com/p/9078fdffd810</a></p>
+</li>
 <li></li>
 </ul>
 
@@ -989,7 +1260,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一-原生Js基础-掌握情况——非常重要"><span class="nav-number">1.</span> <span class="nav-text">一.原生Js基础 掌握情况——非常重要</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本数据类型和引用数据类型的区别"><span class="nav-number">1.1.</span> <span class="nav-text">基本数据类型和引用数据类型的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现继承的几种方式及工作原理"><span class="nav-number">1.2.</span> <span class="nav-text">实现继承的几种方式及工作原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#闭包的理解"><span class="nav-number">1.3.</span> <span class="nav-text">闭包的理解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#预解析和变量提升"><span class="nav-number">1.4.</span> <span class="nav-text">预解析和变量提升</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#this-的理解"><span class="nav-number">1.5.</span> <span class="nav-text">this 的理解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事件冒泡的三个阶段-如何阻止"><span class="nav-number">1.6.</span> <span class="nav-text">事件冒泡的三个阶段  如何阻止</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一-原生Js基础-掌握情况——非常重要"><span class="nav-number">1.</span> <span class="nav-text">一.原生Js基础 掌握情况——非常重要</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本数据类型和引用数据类型的区别"><span class="nav-number">1.1.</span> <span class="nav-text">基本数据类型和引用数据类型的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现继承的几种方式及工作原理"><span class="nav-number">1.2.</span> <span class="nav-text">实现继承的几种方式及工作原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#闭包的理解"><span class="nav-number">1.3.</span> <span class="nav-text">闭包的理解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#预解析和变量提升"><span class="nav-number">1.4.</span> <span class="nav-text">预解析和变量提升</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#this-的理解"><span class="nav-number">1.5.</span> <span class="nav-text">this 的理解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事件冒泡的三个阶段-如何阻止"><span class="nav-number">1.6.</span> <span class="nav-text">事件冒泡的三个阶段  如何阻止</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ajax的作用-使用步骤-对比-fetch-axios"><span class="nav-number">2.</span> <span class="nav-text">ajax的作用 使用步骤 对比 fetch axios</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组的增删改查操作-排序-乱序-去重"><span class="nav-number">3.</span> <span class="nav-text">数组的增删改查操作 排序 乱序 去重</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原形-原型链-的理解"><span class="nav-number">4.</span> <span class="nav-text">原形 原型链 的理解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ES6的新特性"><span class="nav-number">5.</span> <span class="nav-text">ES6的新特性</span></a></li></ol></div>
             
 
           </div>
