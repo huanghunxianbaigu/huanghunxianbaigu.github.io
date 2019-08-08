@@ -101,7 +101,7 @@
 <meta property="og:site_name" content="黄昏现白骨">
 <meta property="og:description" content="React面试题 异步几种方式，实现的原理  * Promise： 常用的方法all、ones         * 他调用了函数resolve()和reject()。resolve()函数告诉promise用户promise已解决；reject()函数告诉promise用户promise未能顺利完成。                   * 优点：回调函数写成了链式写法，程序的流程可以看得很清楚">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-08T03:32:12.280Z">
+<meta property="og:updated_time" content="2019-08-08T07:22:03.704Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="黄昏现白骨">
 <meta name="twitter:description" content="React面试题 异步几种方式，实现的原理  * Promise： 常用的方法all、ones         * 他调用了函数resolve()和reject()。resolve()函数告诉promise用户promise已解决；reject()函数告诉promise用户promise未能顺利完成。                   * 优点：回调函数写成了链式写法，程序的流程可以看得很清楚">
@@ -410,7 +410,7 @@
                 
               
 
-              <time title="创建时间：2019-08-08 10:15:29 / 修改时间：11:32:12" itemprop="dateCreated datePublished" datetime="2019-08-08T10:15:29+08:00">2019-08-08</time>
+              <time title="创建时间：2019-08-08 10:15:29 / 修改时间：15:22:03" itemprop="dateCreated datePublished" datetime="2019-08-08T10:15:29+08:00">2019-08-08</time>
             
 
             
@@ -503,6 +503,42 @@
 <li><strong>初始化state</strong>： 放在构造函数constructor里</li>
 <li><strong>修改state</strong>：放在render函数里 用setState（）</li>
 </ul>
+<p><strong>React数据流：</strong></p>
+<ul>
+<li><p><strong>在React**</strong>中，数据是自顶向下单向流动的，即从父组件到子组件。这条原则让组件之间的关系变得简单且可预测。**</p>
+</li>
+<li><p><strong>state与props是React组件中最重要的概念，</strong>如果顶层组件初始化props，那么React会向下遍历整棵组件树，重新尝试渲染所有相关的子组件。而<strong>state只关心每个组件自己内部的状态，这些状态只能在组件内改变</strong>。把组件看成一个函数，那么它接受了props作为参数，内部由state作为函数的内部参数，返回一个virtual DOM实现。</p>
+</li>
+<li><p><strong>其中react有三个非常重要的概念：state、props与context</strong>。<strong>state其实应该被称为内部状态或是局部状态。</strong>“内部”表示它很少”跑出”组件，状态意味着它经常发生改变。<strong>Props与context用于在组件中传递数据，props仅仅支持逐层传递数据，但是context则支持跨级传递。</strong>State、props与context都是react中的数据载体，他们都是各司其职，让数据在组件中优雅的变化和流动。</p>
+</li>
+</ul>
+<p><strong>state：</strong></p>
+<ul>
+<li>在使用React之前，常见的MVC框架也非常容易实现交互界面的状态管理。在MVC框架将View中与界面交互的状态解耦，一般将状态放在Model中管理。但是React没有结合Flux或是Redux框架前，React也同样可以管理组件的内部状态。在React中，把这类状态统一称为state。</li>
+<li>当组件内部使用库内置的setState方法时，最大的表现行为就是该组件会尝试重新渲染。这很好理解，因为我们改变了内部的状态，组件需要更新了。</li>
+<li>在React中常常在事件处理方法中更新state，上面的例子中就是通过点击“更新”按钮不断地更新内部cout的值，这样就可以把组件内状态封装在实现中。</li>
+<li>值得注意的是，setState是一个异步的方法，一个生命周期内所有的setState方法会合并操作，有了这个特性，让React变得充满想象力，我们完全可以只用React来完成行为控制、数据的更新和界面的渲染。然而，随着内容的深入，我们发现官方并不推荐开发者滥用state。因为过多的内部状态会让数据流混乱，数据变得难以维护。</li>
+<li>我们再看一下Tabs组件的state，我们了解到应该有两个内部状态– activeIndex和preIndex，这两个状态分别表示当前选中tab的索引和前一次选中的tab的索引，我们需要注意的是，当前选中的索引也是组件本身需要的参数之一。</li>
+<li>我们针对activeIndex做为state，就有两种不同的视角：<ul>
+<li>activeIndex在内部更新：当我们切换tab标签时，可以看做是组件内部的交互行为，被选择后通过回调函数返回具体选择的索引。</li>
+<li>activeIndex 在外部更新：当我们切换tab标签时，可以看做是组件外部在传入具体的索引，而组件就像‘木偶’一样被操作。</li>
+<li>这两种情况在React组件的设计非常的常见，我们形象的把第一种和第二种视角写成的组件分别称为智能组件(smart component)和木偶组件(dumb component)</li>
+</ul>
+</li>
+</ul>
+<p><strong>props</strong></p>
+<ul>
+<li>props是React中的另外的一个重要概念。props是React用来让组件之间互相联系的一种机制，通俗的说就像方法传入参数一样。</li>
+<li>props的传统过程，对于React组件来说是非常直观的。React的单向数据流，主要的流动管道就是props。props本身是不可变的，当我们试图改变props的原始值的时候，React会报出类型错误的警告，组件的props一定来自于 默认属性或通过父组件传递而来。如果说要渲染一个对props加工后的值，最简单的方法就是使用局部变量或直接在JSX中计算结果。</li>
+<li>我们之前了解到Tabs组件的数据都是通过data prop传入的，也就是<tabs data="{data}">。那么Tabs组件的props还会有哪些，我们看一下下面的几项：<ul>
+<li>className:根节点的class，为了方便覆盖其原始样式，我们都会在根节点上定义class。</li>
+<li>classPrefix：class前缀，对于组件来说，定义一个统一的class前缀，对样式与交互分离起了很重要的作用。</li>
+<li>defaultActiveIndex和activeIndex：默认的激活索引</li>
+<li>onChange：回调函数，当我们切换tab的时候，外组件需要知道组件的内部信息，尤其是当前tab的索引号的信息，onChange一般与activeIndex搭配使用。</li>
+<li>React为props同样提供了默认配置，通过defaultProp静态变量的方式来定义。当组件被调用的时候，默认值保证渲染后始终有值。在render方法中，可以直接使用props的值来渲染</li>
+</ul>
+</tabs></li>
+</ul>
 <h3 id="虚拟DOM"><a href="#虚拟DOM" class="headerlink" title="虚拟DOM"></a>虚拟DOM</h3><p>虚拟DOM就是将DOM树转换成一个JS对象树。</p>
 <p>React将DOM抽象为虚拟DOM，虚拟DOM其实就是用一个js对象来描述DOM，通过对比前后两个对象的差异，最终只把变化的部分重新渲染，提高渲染的效率。</p>
 <p>vdom render + diff 显然比原生DOM渲染 html 字符串要慢，但是，它依然是纯 js 层面的计算，比起后面的 DOM 操作来说，依然便宜了太多。依次来看，就可以看出vdom很好的提高了渲染效率</p>
@@ -524,6 +560,29 @@
 <li><p><strong>Key属性：</strong>为了解决以上问题，React提供了一个 key 属性。当子节点带有key属性，React会通过key来匹配原始树和后来的树。</p>
 </li>
 <li><p><strong>创建虚拟dom：</strong>createElement()方式</p>
+</li>
+<li><p><strong>React 中 keys 的作用是什么？</strong></p>
+<ul>
+<li>Keys 是 React 用于追踪哪些列表中元素被修改、被添加或者被移除的辅助标识。</li>
+<li>在开发过程中，我们需要保证某个元素的 key 在其同级元素中具有唯一性。在 React Diff 算法中 React 会借助元素的 Key 值来判断该元素是新近创建的还是被移动而来的元素，从而减少不必要的元素重渲染。此外，React 还需要借助 Key 值来判断元素与本地状态的关联关系，因此我们绝不可忽视转换函数中 Key 的重要性。</li>
+</ul>
+</li>
+<li><p><strong>调用 setState 之后发生了什么？</strong></p>
+<p>在代码中调用 setState 函数之后，React 会将传入的参数对象与组件当前的状态合并，然后触发所谓的调和过程（Reconciliation）。经过调和过程，React 会以相对高效的方式根据新的状态构建 React 元素树并且着手重新渲染整个 UI 界面。在 React 得到元素树之后，React 会自动计算出新的树与老树的节点差异，然后根据差异对界面进行最小化重渲染。在差异计算算法中，React 能够相对精确地知道哪些位置发生了改变以及应该如何改变，这就保证了按需更新，而不是全部重新渲染。</p>
+</li>
+<li><p><strong>react diff 原理</strong></p>
+<ul>
+<li>把树形结构按照层级分解，只比较同级元素</li>
+<li>给列表结构的每个单元添加唯一的 key 属性，方便比较</li>
+<li>React 只会匹配相同 class 的 component（这里面的 class 指的是组件的名字）</li>
+<li>合并操作，调用 component 的 setState 方法的时候, React 将其标记为 dirty.到每一个事件循环结束, React 检查所有标记 dirty 的 component 重新绘制.</li>
+<li>选择性子树渲染。开发人员可以重写 shouldComponentUpdate 提高 diff 的性能</li>
+</ul>
+</li>
+<li><p><strong>React 中 refs 的作用是什么？</strong></p>
+<p>Refs 是 React 提供给我们的安全访问 DOM 元素或者某个组件实例的句柄。我们可以为元素添加 ref 属性然后在回调函数中接受该元素在 DOM 树中的句柄，该值会作为回调函数的第一个参数返回：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input  type=<span class="string">'text'</span>  ref=&#123;(input) =&gt; inputElement = input&#125; /&gt;</span><br></pre></td></tr></table></figure>
+
 </li>
 </ul>
 <h3 id="Jsx语法"><a href="#Jsx语法" class="headerlink" title="Jsx语法"></a>Jsx语法</h3><p>安装：npm i -D babel-preset-react</p>
@@ -555,24 +614,28 @@
 <p><strong>组件是由一个个的HTML元素组成的</strong></p>
 <p><strong>概念上来讲, 组件就像JS中的函数。它们接受用户输入（props），并且返回一个React对象，用来描述展示在页面中的内容</strong></p>
 <ul>
-<li><strong>React创建组件的两种方式</strong><ul>
+<li><p><strong>React创建组件的两种方式</strong></p>
+<ul>
 <li>通过 JS函数 创建（无状态组件）</li>
 <li>通过 class 创建（有状态组件）</li>
 </ul>
 </li>
-<li><strong>函数式组件 和 class 组件的使用场景说明</strong><ul>
+<li><p><strong>函数式组件 和 class 组件的使用场景说明</strong></p>
+<ul>
 <li>如果一个组件仅仅是为了展示数据，那么此时就可以使用 函数组件</li>
 <li>如果一个组件中有一定业务逻辑，需要操作数据，那么就需要使用 class 创建组件，因为，此时需要使用 state</li>
 </ul>
 </li>
-<li><strong>JavaScript函数创建</strong><ul>
+<li><p><strong>JavaScript函数创建</strong></p>
+<ul>
 <li>函数名称必须为大写字母开头，React通过这个特点来判断是不是一个组件</li>
 <li>函数必须有返回值，返回值可以是：JSX对象或null</li>
 <li>返回的JSX，必须有一个根元素</li>
 <li>组件的返回值使用()包裹，避免换行问题</li>
 </ul>
 </li>
-<li><strong>React组件API</strong><ul>
+<li><p><strong>React组件API</strong></p>
+<ul>
 <li><strong>setState</strong> 设置状态</li>
 <li>replaceState 替换状态</li>
 <li>setProps 设置属性</li>
@@ -582,29 +645,133 @@
 <li>React.findDOMNode()只在mounted组件中调用，如果在组件的render()方法中调用React.findDOMNode()就会抛出异常</li>
 </ul>
 </li>
-<li><strong>Props和state的区别：</strong><ul>
+<li><p><strong>Props和state的区别：</strong></p>
+<ul>
 <li>一个组件的显示形态可以由数据状态和外部参数所决定，外部参数也就是props，而数据状态就是state。</li>
 <li>props经常被用作渲染组件和初始化状态，当一个组件被实例化之后，它的<strong>props是只读的，不可改变的</strong>。如果props在渲染过程中可以被改变，会导致这个组件显示的形态变得不可预测。只有通过父组件重新渲染的方式才可以把新的props传入组件中。</li>
 <li>props是一个从外部传进组件的参数，主要作为就是从父组件向子组件传递数据，它具有可读性和不变性，只能通过外部组件主动传入新的props来重新渲染子组件，否则子组件的props以及展现形式不会改变。</li>
 <li>state不同于props的一点是<strong>，state是可以被改变的</strong>。不过，不可以直接通过this.state=的方式来修改，而需要通过this.setState()方法来修改state。</li>
 </ul>
 </li>
+<li><p><strong>展示组件(Presentational component)和容器组件(Container component)之间有何不同</strong></p>
+<ul>
+<li>展示组件关心组件看起来是什么。展示专门通过 props 接受数据和回调，并且几乎不会有自身的状态，但当展示组件拥有自身的状态时，通常也只关心 UI 状态而不是数据的状态。</li>
+<li>容器组件则更关心组件是如何运作的。容器组件会为展示组件或者其它容器组件提供数据和行为(behavior)，它们会调用 Flux actions，并将其作为回调提供给展示组件。容器组件经常是有状态的，因为它们是(其它组件的)数据源。</li>
+</ul>
+</li>
+<li><p><strong>类组件(Class component)和函数式组件(Functional component)之间有何不同</strong></p>
+<ul>
+<li>类组件不仅允许你使用更多额外的功能，如组件自身的状态和生命周期钩子，也能使组件直接访问 store 并维持状态</li>
+<li>当组件仅是接收 props，并将组件自身渲染到页面时，该组件就是一个 ‘无状态组件(stateless component)’，可以使用一个纯函数来创建这样的组件。这种组件也被称为哑组件(dumb components)或展示组件</li>
+</ul>
+</li>
+<li><p><strong>何为受控组件(controlled component)</strong></p>
+<p>在 HTML 中，类似 <input>, <textarea> 和 </textarea><select> 这样的表单元素会维护自身的状态，并基于用户的输入来更新。当用户提交表单时，前面提到的元素的值将随表单一起被发送。但在 React 中会有些不同，包含表单元素的组件将会在 state 中追踪输入的值，并且每次调用回调函数时，如 onChange 会更新 state，重新渲染组件。一个输入表单元素，它的值通过 React 的这种方式来控制，这样的元素就被称为”受控元素”。</select></p>
+</li>
+<li><p><strong>何为高阶组件(higher order component)</strong></p>
+<p>高阶组件是一个以组件为参数并返回一个新组件的函数。HOC 运行你重用代码、逻辑和引导抽象。最常见的可能是 Redux 的 connect 函数。除了简单分享工具库和简单的组合，HOC 最好的方式是共享 React 组件之间的行为。如果你发现你在不同的地方写了大量代码来做同一件事时，就应该考虑将代码重构为可重用的 HOC。</p>
+</li>
+<li><p><strong>为什么建议传递给 setState 的参数是一个 callback 而不是一个对象</strong></p>
+<p>因为 this.props 和 this.state 的更新可能是异步的，不能依赖它们的值去计算下一个 state。</p>
+</li>
+<li><p><strong>除了在构造函数中绑定 this，还有其它方式吗</strong></p>
+<p>你可以使用属性初始值设定项(property initializers)来正确绑定回调，create-react-app 也是默认支持的。在回调中你可以使用箭头函数，但问题是每次组件渲染时都会创建一个新的回调。</p>
+</li>
+<li><p><strong>(在构造函数中)调用 super(props) 的目的是什么</strong></p>
+<p>在 super() 被调用之前，子类是不能使用 this 的，在 ES2015 中，子类必须在 constructor 中调用 super()。传递 props 给 super() 的原因则是便于(在子类中)能在 constructor 访问 this.props。</p>
+</li>
+<li><p><strong>应该在 React 组件的何处发起 Ajax 请求</strong></p>
+<p>在 React 组件中，应该在 componentDidMount 中发起网络请求。这个方法会在组件第一次“挂载”(被添加到 DOM)时执行，在组件的生命周期中仅会执行一次。更重要的是，你不能保证在组件挂载之前 Ajax 请求已经完成，如果是这样，也就意味着你将尝试在一个未挂载的组件上调用 setState，这将不起作用。在 componentDidMount 中发起网络请求将保证这有一个组件可以更新了。</p>
+</li>
+<li><p><strong>描述事件在 React 中的处理方式。</strong></p>
+<p>为了解决跨浏览器兼容性问题，您的 React 中的事件处理程序将传递 SyntheticEvent 的实例，它是 React 的浏览器本机事件的跨浏览器包装器。</p>
+<p>这些 SyntheticEvent 与您习惯的原生事件具有相同的接口，除了它们在所有浏览器中都兼容。有趣的是，React 实际上并没有将事件附加到子节点本身。React 将使用单个事件监听器监听顶层的所有事件。这对于性能是有好处的，这也意味着在更新 DOM 时，React 不需要担心跟踪事件监听器。</p>
+</li>
+<li><p><strong>createElement 和 cloneElement 有什么区别？</strong></p>
+<p><strong>React.createElement():</strong>JSX 语法就是用 React.createElement()来构建 React 元素的。它接受三个参数，第一个参数可以是一个标签名。如 div、span，或者 React 组件。第二个参数为传入的属性。第三个以及之后的参数，皆作为组件的子组件。</p>
+<p><strong>React.cloneElement()与 React.createElement()相似</strong>，不同的是它传入的第一个参数是一个 React 元素，而不是标签名或组件。新添加的属性会并入原有的属性，传入到返回的新元素中，而就的子元素将被替换。</p>
+</li>
+<li><p><strong>React 中有三种构建组件的方式</strong></p>
+<p>React.createClass()、ES6 class 和无状态函数</p>
+</li>
 </ul>
 <h3 id="React组件的生命周期"><a href="#React组件的生命周期" class="headerlink" title="React组件的生命周期"></a><strong>React组件的生命周期</strong></h3><ul>
-<li><strong>组件生命周期的三个状态</strong><ul>
+<li><p><strong>组件生命周期的三个状态</strong></p>
+<ul>
 <li>Mounting: 已插入真实DOM</li>
 <li>Updating: 正在被重新渲染</li>
 <li>Unmounting: 已移除真实DOM</li>
 </ul>
 </li>
-<li><strong>生命周期方法</strong><ul>
+<li><p><strong>生命周期方法</strong></p>
+<ul>
 <li><strong>componentWillMount：</strong> 在渲染前调用，在客户端也在服务端</li>
 <li><strong>componentDidMount：</strong> 在第一次渲染后调用，只在客户端。之后组件已经生成了对应的DOM结构，可以通过this.getDOMNode()来进行访问。如果你想和其他JavaScript框架一起使用，可以在这个方法中调用setTimeout, setInterval或者发送AJAX请求等操作(防止异部操作阻塞UI)</li>
+<li><strong>render()：</strong>创建虚拟dom，进行diff算法，更新dom树都在此进行</li>
+<li><strong>constructor()：</strong>可初始化state</li>
 <li><strong>componentWillReceiveProps：</strong> 在初始化render时不会被调用，当组件接收到一个新的prop时被调用</li>
 <li><strong>houldComponentUpdate：</strong> 返回一个布尔值。当确认不需要更新组件时使用。在组件接收到新的state或新的props时被调用。在初始化时或使用forceUpdate时不被调用</li>
 <li><strong>componentWillUpdate：</strong> 初始化不会调用。组件接收到新的state或者props但还没有render时被调用</li>
 <li><strong>componentDidUpdate：</strong> 初始化不会调用。组件完成更新后立即调用。</li>
 <li><strong>componentWillUnmount：</strong> 组件从DOM中移除的时候立刻被调用。</li>
+</ul>
+</li>
+<li><p>生命周期方法流程</p>
+<ul>
+<li><p><strong>Mounting（加载阶段）</strong></p>
+<ul>
+<li><strong>constructor()：</strong>可初始化state</li>
+<li><strong>componentWillMount()：</strong>组件加载时只调用，以后组件更新不调用，整个生命周期只调用一次，此时可以修改<strong>state</strong></li>
+<li><strong>render()：</strong>创建虚拟dom，进行diff算法，更新dom树都在此进行</li>
+<li><strong>componentDidMount()：</strong>组件渲染之后调用，只调用一次</li>
+</ul>
+</li>
+<li><h4 id="Updating（更新阶段：涉及5个钩子函数"><a href="#Updating（更新阶段：涉及5个钩子函数" class="headerlink" title="Updating（更新阶段：涉及5个钩子函数)"></a><strong>Updating（更新阶段：涉及5个钩子函数)</strong></h4><ul>
+<li><strong>componentWillReceivePorps(nextProps)：</strong>组件加载时不调用，组件接受新的props时调用</li>
+<li><strong>shouldComponentUpdate(nextProps, nextState)：</strong>组件接收到新的props或者state时调用，return true就会更新dom（使用diff算法更新），return false能阻止更新（不调用render）</li>
+<li><strong>componentWillUpdata(nextProps, nextState)：</strong>组件加载时不调用，只有在组件将要更新时才调用，此时可以修改state</li>
+<li><strong>render()：</strong>react最重要的步骤，创建虚拟dom，进行diff算法，更新dom树都在此进行</li>
+<li><strong>componentDidUpdate()：</strong>组件加载时不调用，组件更新完成后调用</li>
+</ul>
+</li>
+<li><h4 id="Unmounting（卸载阶段：涉及1个钩子函数）"><a href="#Unmounting（卸载阶段：涉及1个钩子函数）" class="headerlink" title="Unmounting（卸载阶段：涉及1个钩子函数）"></a><strong>Unmounting（卸载阶段：涉及1个钩子函数）</strong></h4><ul>
+<li><strong>componentWillUnmount():</strong>组件渲染之后调用，只调用一次</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="新的生命周期"><a href="#新的生命周期" class="headerlink" title="新的生命周期"></a><strong>新的生命周期</strong></h3><ul>
+<li><h4 id="Mounting（加载阶段：涉及4个钩子函数）"><a href="#Mounting（加载阶段：涉及4个钩子函数）" class="headerlink" title="Mounting（加载阶段：涉及4个钩子函数）"></a><strong>Mounting（加载阶段：涉及4个钩子函数）</strong></h4><ul>
+<li><strong>constructor()</strong>：加载的时候调用一次，可以初始化<strong>state</strong></li>
+<li><strong>static getDerivedStateFromProps(props, state)</strong>：组件每次被render的时候，包括在组件构建之后(虚拟dom之后，实际dom挂载之前)，每次获取新的props或<strong>state</strong>之后；每次接收新的props之后都会返回一个对象作为新的<strong>state</strong>，返回null则说明不需要更新<strong>state</strong>；配合componentDidUpdate，可以覆盖componentWillReceiveProps的所有用法。</li>
+<li><strong>render()</strong>：创建虚拟dom，进行diff算法，更新dom树都在此进行</li>
+<li><strong>componentDidMount()</strong>：组件渲染之后调用，只调用一次</li>
+</ul>
+</li>
+<li><h4 id="Updating（更新阶段：涉及5个钩子函数-1"><a href="#Updating（更新阶段：涉及5个钩子函数-1" class="headerlink" title="Updating（更新阶段：涉及5个钩子函数)"></a><strong>Updating（更新阶段：涉及5个钩子函数)</strong></h4><ul>
+<li><strong>static getDerivedStateFromProps(props, state)</strong>：组件每次被render的时候，包括在组件构建之后(虚拟dom之后，实际dom挂载之前)，每次获取新的props或<strong>state</strong>之后；每次接收新的props之后都会返回一个对象作为新的<strong>state</strong>，返回null则说明不需要更新<strong>state</strong>；配合componentDidUpdate，可以覆盖componentWillReceiveProps的所有用法</li>
+<li><strong>shouldComponentUpdate(nextProps, nextState)</strong>：组件接收到新的props或者state时调用，<strong>return</strong> true就会更新dom（使用diff算法更新），<strong>return</strong> false能阻止更新（不调用render）</li>
+<li><strong>render()</strong>：创建虚拟dom，进行diff算法，更新dom树都在此进行</li>
+<li><strong>getSnapshotBeforeUpdate(prevProps, prevState)</strong>：触发时间: <strong>update</strong>发生的时候，在render之后，在组件dom渲染之前；返回一个值，作为componentDidUpdate的第三个参数；配合componentDidUpdate, 可以覆盖componentWillUpdate的所有用法</li>
+<li><strong>componentDidUpdate()</strong>：组件加载时不调用，组件更新完成后调用</li>
+</ul>
+</li>
+<li><h4 id="Unmounting（卸载阶段：涉及1个钩子函数）-1"><a href="#Unmounting（卸载阶段：涉及1个钩子函数）-1" class="headerlink" title="Unmounting（卸载阶段：涉及1个钩子函数）"></a><strong>Unmounting（卸载阶段：涉及1个钩子函数）</strong></h4><ul>
+<li><strong>componentWillUnmount():</strong>组件渲染之后调用，只调用一次</li>
+</ul>
+</li>
+<li><h4 id="Error-Handling-错误处理"><a href="#Error-Handling-错误处理" class="headerlink" title="Error Handling(错误处理)"></a><strong>Error Handling(错误处理)</strong></h4><ul>
+<li><strong>componentDidCatch(error，info)</strong>：任何一处的javascript报错会触发</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>总结：</strong></p>
+<ul>
+<li>React16新的生命周期弃用了<strong>componentWillMount、componentWillReceivePorps，componentWillUpdate</strong></li>
+<li>新增了<strong>getDerivedStateFromProps、getSnapshotBeforeUpdate</strong>来代替弃用的三个钩子函数（componentWillMount、componentWillReceivePorps，componentWillUpdate）</li>
+<li>React16并没有删除这三个钩子函数，但是不能和新增的钩子函数（<strong>getDerivedStateFromProps、getSnapshotBeforeUpdate</strong>）混用，React17将会删除<strong>componentWillMount、componentWillReceivePorps，componentWillUpdate</strong></li>
+<li>新增了对错误的处理（<strong>componentDidCatch</strong>）</li>
 </ul>
 </li>
 </ul>
@@ -668,6 +835,16 @@
 <ul>
 <li>主要区别在于 Flux 有多个可以改变应用状态的 store，在 Flux 中dispatcher 被用来传递数据到注册的回调事件，但是在 redux 中只能定义一个可更新状态的 store，redux 把 store 和 Dispatcher 合并,结构更加简单清晰</li>
 <li>新增 state,对状态的管理更加明确，通过 redux，流程更加规范了，减少手动编码量，提高了编码效率，同时缺点时当数据更新时有时候组件不需要，但是也要重新绘制，有些影响效率。一般情况下，我们在构建多交互，多数据流的复杂项目应用时才会使用它们</li>
+</ul>
+</li>
+<li><p><strong>简述 flux 思想</strong></p>
+<ul>
+<li>Flux 的最大特点，就是数据的”单向流动”。</li>
+<li>用户访问 View</li>
+<li>View 发出用户的 Action</li>
+<li>Dispatcher 收到 Action，要求 Store 进行相应的更新</li>
+<li>Store 更新后，发出一个”change”事件</li>
+<li>View 收到”change”事件后，更新页面</li>
 </ul>
 </li>
 <li><p><strong>redux 有什么缺点：</strong></p>
@@ -830,6 +1007,43 @@
 <li><strong>怎么优化数据逻辑处理：</strong><ul>
 <li>把逻辑较多的功能再细分一下，封装好</li>
 <li>用数组的数据存储 应该算最简便的方式，建议无复杂的逻辑处理  还是使用数组的filter来过滤数据</li>
+</ul>
+</li>
+</ul>
+<h3 id="Webpack项目优化："><a href="#Webpack项目优化：" class="headerlink" title="Webpack项目优化："></a><strong>Webpack项目优化：</strong></h3><ul>
+<li><p><strong>使用yarn而不是npm</strong></p>
+<p>由于项目使用npm安装包，容易导致在多关联依赖关系中，很可能某个库在指定依赖时没有指定版本号，进而导致不同设备上拉到的package版本不一。yarn不管安装顺序如何，相同的依赖关系将以相同的方式安装在任何机器上。当关联依赖中包括对某个软件包的重复引用，在实际安装时将尽量避免重复的创建。yarn不仅可以缓存它安装过的包，而且安装速度快，使用yarn无疑可以很大程度改善工作流和工作效率</p>
+</li>
+<li><p><strong>删除没有使用的依赖</strong></p>
+<p>很多时候，我们由于项目人员变动比较大，参与项目的人也比较多，在分析项目时，我发现了一些问题，诸如：有些文件引入进来的库没有被使用到也没有及时删除，也会被打包一遍。</p>
+</li>
+<li><p><strong>优化方案与思路</strong></p>
+<p>针对webpack构建大规模应用的优化往往比较复杂，我们需要抽丝剥茧，从性能提升点着手，可能没有一套通用的方案，但大体上的思路是通用的，核心思路可能包括但不限于如下：</p>
+<ul>
+<li>拆包，限制构建范围，减少资源搜索时间，无关资源不要参与构建</li>
+<li>使用增量构建而不是全量构建</li>
+<li>从webpack存在的不足出发，优化不足，提升效率</li>
+</ul>
+</li>
+<li><h3 id="webpack打包优化"><a href="#webpack打包优化" class="headerlink" title="webpack打包优化"></a><strong>webpack打包优化</strong></h3><ul>
+<li><p><strong>减小打包文件体积</strong></p>
+<p>webpack+react的项目打包出来的文件经常动则几百kb甚至上兆，究其原因有：</p>
+<ul>
+<li><strong>import css文件的时候，会直接作为模块一并打包到js文件中：</strong>我们可以使用 extract-text-webpack-plugin，但缺点是会产生更长时间的编译，也没有HMR，还会增加额外的HTTP请求。对于css文件不是很大的情况最好还是不要使用该插件。</li>
+<li><strong>所有js模块 + 依赖都会打包到一个文件：</strong>我们可以通过提取公共代码块</li>
+<li><strong>React、ReactDOM文件过大：</strong>我们可以把React、ReactDOM缓存起来</li>
+</ul>
+</li>
+<li><p><strong>代码压缩</strong></p>
+<p>webpack提供的UglifyJS插件由于采用单线程压缩，速度很慢 ,<br>webpack-parallel-uglify-plugin插件可以并行运行UglifyJS插件，这可以有效减少构建时间，当然，该插件应用于生产环境而非开发环境。</p>
+</li>
+<li><p><strong>缓存与增量构建</strong></p>
+<ul>
+<li>由于项目中主要使用的是react.js和es6，结合webpack的<strong>babel-loader</strong>加载器进行编译，每次重新构建都需要重新编译一次，我们可以针对这个进行增量构建，而不需要每次都全量构建。</li>
+<li><strong>babel-loader</strong>可以缓存处理过的模块，对于没有修改过的文件不会再重新编译，cacheDirectory有着2倍以上的速度提升，这对于rebuild 有着非常大的性能提升</li>
+<li>其他：服务端渲染，首屏优化，异步加载模块，按需加载，代码分割等</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -1036,7 +1250,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#React面试题"><span class="nav-number">1.</span> <span class="nav-text">React面试题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#异步几种方式，实现的原理"><span class="nav-number">1.1.</span> <span class="nav-text">异步几种方式，实现的原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#React的优点："><span class="nav-number">1.2.</span> <span class="nav-text">React的优点：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#React核心"><span class="nav-number">1.3.</span> <span class="nav-text">React核心</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#虚拟DOM"><span class="nav-number">1.4.</span> <span class="nav-text">虚拟DOM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Jsx语法"><span class="nav-number">1.5.</span> <span class="nav-text">Jsx语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#React组件"><span class="nav-number">1.6.</span> <span class="nav-text">React组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#React组件的生命周期"><span class="nav-number">1.7.</span> <span class="nav-text">React组件的生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Redux组成"><span class="nav-number">1.8.</span> <span class="nav-text">Redux组成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#地址栏输入url发生什么"><span class="nav-number">1.9.</span> <span class="nav-text">地址栏输入url发生什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#有那些网站优化的方法？"><span class="nav-number">1.10.</span> <span class="nav-text">有那些网站优化的方法？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Git"><span class="nav-number">1.11.</span> <span class="nav-text">Git</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#项目开发流程"><span class="nav-number">1.12.</span> <span class="nav-text">项目开发流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#项目优化"><span class="nav-number">1.13.</span> <span class="nav-text">项目优化</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#React面试题"><span class="nav-number">1.</span> <span class="nav-text">React面试题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#异步几种方式，实现的原理"><span class="nav-number">1.1.</span> <span class="nav-text">异步几种方式，实现的原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#React的优点："><span class="nav-number">1.2.</span> <span class="nav-text">React的优点：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#React核心"><span class="nav-number">1.3.</span> <span class="nav-text">React核心</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#虚拟DOM"><span class="nav-number">1.4.</span> <span class="nav-text">虚拟DOM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Jsx语法"><span class="nav-number">1.5.</span> <span class="nav-text">Jsx语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#React组件"><span class="nav-number">1.6.</span> <span class="nav-text">React组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#React组件的生命周期"><span class="nav-number">1.7.</span> <span class="nav-text">React组件的生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Updating（更新阶段：涉及5个钩子函数"><span class="nav-number">1.7.1.</span> <span class="nav-text">Updating（更新阶段：涉及5个钩子函数)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Unmounting（卸载阶段：涉及1个钩子函数）"><span class="nav-number">1.7.2.</span> <span class="nav-text">Unmounting（卸载阶段：涉及1个钩子函数）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#新的生命周期"><span class="nav-number">1.8.</span> <span class="nav-text">新的生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Mounting（加载阶段：涉及4个钩子函数）"><span class="nav-number">1.8.1.</span> <span class="nav-text">Mounting（加载阶段：涉及4个钩子函数）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Updating（更新阶段：涉及5个钩子函数-1"><span class="nav-number">1.8.2.</span> <span class="nav-text">Updating（更新阶段：涉及5个钩子函数)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Unmounting（卸载阶段：涉及1个钩子函数）-1"><span class="nav-number">1.8.3.</span> <span class="nav-text">Unmounting（卸载阶段：涉及1个钩子函数）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Error-Handling-错误处理"><span class="nav-number">1.8.4.</span> <span class="nav-text">Error Handling(错误处理)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Redux组成"><span class="nav-number">1.9.</span> <span class="nav-text">Redux组成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#地址栏输入url发生什么"><span class="nav-number">1.10.</span> <span class="nav-text">地址栏输入url发生什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#有那些网站优化的方法？"><span class="nav-number">1.11.</span> <span class="nav-text">有那些网站优化的方法？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Git"><span class="nav-number">1.12.</span> <span class="nav-text">Git</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#项目开发流程"><span class="nav-number">1.13.</span> <span class="nav-text">项目开发流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#项目优化"><span class="nav-number">1.14.</span> <span class="nav-text">项目优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Webpack项目优化："><span class="nav-number">1.15.</span> <span class="nav-text">Webpack项目优化：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#webpack打包优化"><span class="nav-number">1.16.</span> <span class="nav-text">webpack打包优化</span></a></li></ol></li></ol></div>
             
 
           </div>
