@@ -101,7 +101,7 @@
 <meta property="og:site_name" content="黄昏现白骨">
 <meta property="og:description" content="React面试题 异步几种方式，实现的原理  * Promise： 常用的方法all、ones         * 他调用了函数resolve()和reject()。resolve()函数告诉promise用户promise已解决；reject()函数告诉promise用户promise未能顺利完成。                   * 优点：回调函数写成了链式写法，程序的流程可以看得很清楚">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-08T07:24:05.925Z">
+<meta property="og:updated_time" content="2019-08-08T11:13:33.128Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="黄昏现白骨">
 <meta name="twitter:description" content="React面试题 异步几种方式，实现的原理  * Promise： 常用的方法all、ones         * 他调用了函数resolve()和reject()。resolve()函数告诉promise用户promise已解决；reject()函数告诉promise用户promise未能顺利完成。                   * 优点：回调函数写成了链式写法，程序的流程可以看得很清楚">
@@ -410,7 +410,7 @@
                 
               
 
-              <time title="创建时间：2019-08-08 10:15:29 / 修改时间：15:24:05" itemprop="dateCreated datePublished" datetime="2019-08-08T10:15:29+08:00">2019-08-08</time>
+              <time title="创建时间：2019-08-08 10:15:29 / 修改时间：19:13:33" itemprop="dateCreated datePublished" datetime="2019-08-08T10:15:29+08:00">2019-08-08</time>
             
 
             
@@ -726,18 +726,21 @@
 <li><strong>componentDidMount()：</strong>组件渲染之后调用，只调用一次</li>
 </ul>
 </li>
-<li><h4 id="Updating（更新阶段：涉及5个钩子函数"><a href="#Updating（更新阶段：涉及5个钩子函数" class="headerlink" title="Updating（更新阶段：涉及5个钩子函数)"></a><strong>Updating（更新阶段：涉及5个钩子函数)</strong></h4><ul>
-<li><strong>componentWillReceivePorps(nextProps)：</strong>组件加载时不调用，组件接受新的props时调用</li>
+<li><p><strong>Updating（更新阶段：涉及5个钩子函数)</strong></p>
+</li>
+</ul>
+</li>
+<li><p><strong>componentWillReceivePorps(nextProps)：</strong>组件加载时不调用，组件接受新的props时调用</p>
+<ul>
 <li><strong>shouldComponentUpdate(nextProps, nextState)：</strong>组件接收到新的props或者state时调用，return true就会更新dom（使用diff算法更新），return false能阻止更新（不调用render）</li>
 <li><strong>componentWillUpdata(nextProps, nextState)：</strong>组件加载时不调用，只有在组件将要更新时才调用，此时可以修改state</li>
 <li><strong>render()：</strong>react最重要的步骤，创建虚拟dom，进行diff算法，更新dom树都在此进行</li>
 <li><strong>componentDidUpdate()：</strong>组件加载时不调用，组件更新完成后调用</li>
 </ul>
 </li>
-<li><h4 id="Unmounting（卸载阶段：涉及1个钩子函数）"><a href="#Unmounting（卸载阶段：涉及1个钩子函数）" class="headerlink" title="Unmounting（卸载阶段：涉及1个钩子函数）"></a><strong>Unmounting（卸载阶段：涉及1个钩子函数）</strong></h4><ul>
+<li><p><strong>Unmounting（卸载阶段：涉及1个钩子函数）</strong></p>
+<ul>
 <li><strong>componentWillUnmount():</strong>组件渲染之后调用，只调用一次</li>
-</ul>
-</li>
 </ul>
 </li>
 <li><h3 id="新的生命周期"><a href="#新的生命周期" class="headerlink" title="新的生命周期"></a><strong>新的生命周期</strong></h3><ul>
@@ -769,9 +772,8 @@
 <li><p><strong>componentWillUnmount():</strong>组件渲染之后调用，只调用一次</p>
 </li>
 <li><p><strong>Error Handling(错误处理)</strong></p>
-<ul>
-<li><strong>componentDidCatch(error，info)</strong>：任何一处的javascript报错会触发</li>
-</ul>
+</li>
+<li><p><strong>componentDidCatch(error，info)</strong>：任何一处的javascript报错会触发</p>
 </li>
 <li><p><strong>总结：</strong></p>
 <ul>
@@ -1257,7 +1259,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#React面试题"><span class="nav-number">1.</span> <span class="nav-text">React面试题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#异步几种方式，实现的原理"><span class="nav-number">1.1.</span> <span class="nav-text">异步几种方式，实现的原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#React的优点："><span class="nav-number">1.2.</span> <span class="nav-text">React的优点：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#React核心"><span class="nav-number">1.3.</span> <span class="nav-text">React核心</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#虚拟DOM"><span class="nav-number">1.4.</span> <span class="nav-text">虚拟DOM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Jsx语法"><span class="nav-number">1.5.</span> <span class="nav-text">Jsx语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#React组件"><span class="nav-number">1.6.</span> <span class="nav-text">React组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#React组件的生命周期"><span class="nav-number">1.7.</span> <span class="nav-text">React组件的生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Updating（更新阶段：涉及5个钩子函数"><span class="nav-number">1.7.1.</span> <span class="nav-text">Updating（更新阶段：涉及5个钩子函数)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Unmounting（卸载阶段：涉及1个钩子函数）"><span class="nav-number">1.7.2.</span> <span class="nav-text">Unmounting（卸载阶段：涉及1个钩子函数）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#新的生命周期"><span class="nav-number">1.8.</span> <span class="nav-text">新的生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Redux组成"><span class="nav-number">1.9.</span> <span class="nav-text">Redux组成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#地址栏输入url发生什么"><span class="nav-number">1.10.</span> <span class="nav-text">地址栏输入url发生什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#有那些网站优化的方法？"><span class="nav-number">1.11.</span> <span class="nav-text">有那些网站优化的方法？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Git"><span class="nav-number">1.12.</span> <span class="nav-text">Git</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#项目开发流程"><span class="nav-number">1.13.</span> <span class="nav-text">项目开发流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#项目优化"><span class="nav-number">1.14.</span> <span class="nav-text">项目优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Webpack项目优化"><span class="nav-number">1.15.</span> <span class="nav-text">Webpack项目优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#webpack打包优化"><span class="nav-number">1.16.</span> <span class="nav-text">webpack打包优化</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#React面试题"><span class="nav-number">1.</span> <span class="nav-text">React面试题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#异步几种方式，实现的原理"><span class="nav-number">1.1.</span> <span class="nav-text">异步几种方式，实现的原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#React的优点："><span class="nav-number">1.2.</span> <span class="nav-text">React的优点：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#React核心"><span class="nav-number">1.3.</span> <span class="nav-text">React核心</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#虚拟DOM"><span class="nav-number">1.4.</span> <span class="nav-text">虚拟DOM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Jsx语法"><span class="nav-number">1.5.</span> <span class="nav-text">Jsx语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#React组件"><span class="nav-number">1.6.</span> <span class="nav-text">React组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#React组件的生命周期"><span class="nav-number">1.7.</span> <span class="nav-text">React组件的生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#新的生命周期"><span class="nav-number">1.8.</span> <span class="nav-text">新的生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Redux组成"><span class="nav-number">1.9.</span> <span class="nav-text">Redux组成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#地址栏输入url发生什么"><span class="nav-number">1.10.</span> <span class="nav-text">地址栏输入url发生什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#有那些网站优化的方法？"><span class="nav-number">1.11.</span> <span class="nav-text">有那些网站优化的方法？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Git"><span class="nav-number">1.12.</span> <span class="nav-text">Git</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#项目开发流程"><span class="nav-number">1.13.</span> <span class="nav-text">项目开发流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#项目优化"><span class="nav-number">1.14.</span> <span class="nav-text">项目优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Webpack项目优化"><span class="nav-number">1.15.</span> <span class="nav-text">Webpack项目优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#webpack打包优化"><span class="nav-number">1.16.</span> <span class="nav-text">webpack打包优化</span></a></li></ol></li></ol></div>
             
 
           </div>
