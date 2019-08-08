@@ -1,0 +1,1566 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.2" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.1.2',
+    sidebar: {"position":"left","display":"always","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="React面试题 异步几种方式，实现的原理  * Promise： 常用的方法all、ones         * 他调用了函数resolve()和reject()。resolve()函数告诉promise用户promise已解决；reject()函数告诉promise用户promise未能顺利完成。                   * 优点：回调函数写成了链式写法，程序的流程可以看得很清楚">
+<meta property="og:type" content="article">
+<meta property="og:title" content="黄昏现白骨">
+<meta property="og:url" content="http://yoursite.com/2019/08/08/react面试题/index.html">
+<meta property="og:site_name" content="黄昏现白骨">
+<meta property="og:description" content="React面试题 异步几种方式，实现的原理  * Promise： 常用的方法all、ones         * 他调用了函数resolve()和reject()。resolve()函数告诉promise用户promise已解决；reject()函数告诉promise用户promise未能顺利完成。                   * 优点：回调函数写成了链式写法，程序的流程可以看得很清楚">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-08T03:29:07.601Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="黄昏现白骨">
+<meta name="twitter:description" content="React面试题 异步几种方式，实现的原理  * Promise： 常用的方法all、ones         * 他调用了函数resolve()和reject()。resolve()函数告诉promise用户promise已解决；reject()函数告诉promise用户promise未能顺利完成。                   * 优点：回调函数写成了链式写法，程序的流程可以看得很清楚">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2019/08/08/react面试题/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title> | 黄昏现白骨</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">黄昏现白骨</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/08/react面试题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LuoXiaoRuo">
+      <meta itemprop="description" content="玲珑骰子安红豆，入骨相思知不知。">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="黄昏现白骨">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-08 10:15:29 / 修改时间：11:29:07" itemprop="dateCreated datePublished" datetime="2019-08-08T10:15:29+08:00">2019-08-08</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="React面试题"><a href="#React面试题" class="headerlink" title="React面试题"></a>React面试题</h2><h3 id="异步几种方式，实现的原理"><a href="#异步几种方式，实现的原理" class="headerlink" title="异步几种方式，实现的原理"></a><strong>异步几种方式，实现的原理</strong></h3><ul>
+<li><p><strong>Promise： 常用的方法all、ones</strong></p>
+<ul>
+<li><p>他调用了函数<strong>resolve()</strong>和<strong>reject()</strong>。resolve()函数告诉promise用户promise已解决；reject()函数告诉promise用户promise未能顺利完成。</p>
+</li>
+<li><p><strong>优点：</strong>回调函数写成了链式写法，程序的流程可以看得很清楚</p>
+</li>
+<li><p><strong>promise（）中有哪几种状态</strong></p>
+<p>Pending(进行中) Fulfilled(已成功) Rejected(已失败)</p>
+<p>1、等待（pending）；2、完成（settled）。</p>
+<p>完成状态分成两类：</p>
+<ul>
+<li>resolve : 将Promise对象的状态从 Pending(进行中) 变为Fulfilled(已成功)</li>
+<li>reject : 将Promise对象的状态从 Pending(进行中) 变为 Rejected(已失败)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>async/await：</strong></p>
+<ul>
+<li><p>async函数就是generator函数的语法糖。</p>
+</li>
+<li><p>async函数，就是将generator函数的*换成async，将yield替换成await。</p>
+</li>
+<li><p>async函数对generator的改进</p>
+<ol>
+<li>内置执行器，不需要使用next()手动执行。</li>
+<li>await命令后面可以是Promise对象或原始类型的值，yield命令后面只能是Thunk函数或Promise对象。</li>
+<li>返回值是Promise。返回非Promise时，async函数会把它包装成Promise返回。(Promise.resolve(value))</li>
+</ol>
+</li>
+<li><p><strong>作用：</strong>异步编程的终极解决方案。</p>
+</li>
+<li><p>通俗理解（个人理解）</p>
+<p>async/await，就是异步编程回调函数写法的替代方法。（使代码以同步方式的写法完成异步操作）</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="React的优点："><a href="#React的优点：" class="headerlink" title="React的优点："></a>React的优点：</h3><ul>
+<li>声明式设计</li>
+<li>高效：有虚拟DOM的概念，最大限度的减少与DOM的交互。</li>
+<li>灵活：可以与已知的框架或库很好的配合。</li>
+<li>JSX：是js语法的扩展，不一定使用，但建议用。</li>
+<li>组件：构建组件，使代码更容易得到复用，能够很好地应用在大项目的开发中。</li>
+<li>单向响应的数据流：React实现了单向响应的数据流，从而减少了重复代码，这也是解释了它为什么比传统数据绑定更简单。</li>
+</ul>
+<h3 id="React核心"><a href="#React核心" class="headerlink" title="React核心"></a>React核心</h3><p><strong>状态（state）、属性（props）、组件API、组件的生命周期</strong></p>
+<p>当react的状态改变时，自动执行this.render()方法更新组件。<br>ES6写React的时候，事件里不会自动绑定this，需要自己绑定，或者直接在constructor里写方法</p>
+<p><strong>属性：</strong></p>
+<ul>
+<li><strong>初始化state</strong>： 放在构造函数constructor里</li>
+<li><strong>修改state</strong>：放在render函数里 用setState（）</li>
+</ul>
+<h3 id="虚拟DOM"><a href="#虚拟DOM" class="headerlink" title="虚拟DOM"></a>虚拟DOM</h3><p>虚拟DOM就是将DOM树转换成一个JS对象树。</p>
+<p>React将DOM抽象为虚拟DOM，虚拟DOM其实就是用一个js对象来描述DOM，通过对比前后两个对象的差异，最终只把变化的部分重新渲染，提高渲染的效率。</p>
+<p>vdom render + diff 显然比原生DOM渲染 html 字符串要慢，但是，它依然是纯 js 层面的计算，比起后面的 DOM 操作来说，依然便宜了太多。依次来看，就可以看出vdom很好的提高了渲染效率</p>
+<ul>
+<li><p><strong>优点：</strong>    </p>
+<ul>
+<li>最终表现在DOM上的修改只是变更的部分，可以保证非常高效的渲染</li>
+<li>提升了性能（JavaScript对象比DOM对象性能高），抽象了DOM的具体实现</li>
+</ul>
+</li>
+<li><p><strong>缺点：</strong>首次渲染大量DOM时，由于多了一层虚拟DOM的计算，会比innerHTML插入慢。</p>
+</li>
+<li><p><strong>操作真实dom的弊端，为什么会影响性能：</strong>操作DOM结构是非常昂贵的，它改动后，整个容器中的内容中的内容都要重新渲染一遍</p>
+</li>
+<li><p><strong>为什么用虚拟dom：</strong>当dom反生更改时需要遍历 而原生dom可遍历属性多大231个 且大部分与渲染无关 更新页面代价太大</p>
+</li>
+<li><p><strong>Diff算法：</strong>当你使用React的时候，在某个时间点 render() 函数创建了一棵React元素树，在下一个state或者props更新的时候，render() 函数将创建一棵新的React元素树，React将对比这两棵树的不同之处，计算出如何高效的更新UI（只更新变化的地方）</p>
+</li>
+<li><p><strong>Key属性：</strong>为了解决以上问题，React提供了一个 key 属性。当子节点带有key属性，React会通过key来匹配原始树和后来的树。</p>
+</li>
+<li><p><strong>创建虚拟dom：</strong>createElement()方式</p>
+</li>
+</ul>
+<h3 id="Jsx语法"><a href="#Jsx语法" class="headerlink" title="Jsx语法"></a>Jsx语法</h3><p>安装：npm i -D babel-preset-react</p>
+<p><strong>JSX的注意点：</strong></p>
+<ul>
+<li><p>如果在 JSX 中给元素添加类, 需要使用 className 代替 class</p>
+</li>
+<li><p>label 的 for属性，使用htmlFor代替</p>
+</li>
+<li><p>在 JSX 中可以直接使用 JS代码，直接在 JSX 中通过 {} 中间写 JS代码即可</p>
+</li>
+<li><p>在 JSX 中只能使用表达式，但是不能出现 语句！！！</p>
+</li>
+<li><p>在 JSX 中注释语法：{/* 中间是注释的内容 */}</p>
+</li>
+<li><p>jsx语法中只能有一个顶级标签（元素）</p>
+</li>
+<li><p>JSX中所有的标签都必须有闭标签</p>
+</li>
+<li><p>使用组件时，首字母必须大写</p>
+</li>
+<li><p>在JSX中我们通常是通过 <code>{}</code> 的方式插入值，但是设置style属性需要<code> {{ }}  </code></p>
+<p><code>并且遇到-分割的属性时，使用小驼峰的写法，如：text-align</code></p>
+</li>
+<li><p>事件必须修正this指针，且绑定事件名时要使用小驼峰的写法</p>
+</li>
+</ul>
+<h3 id="React组件"><a href="#React组件" class="headerlink" title="React组件"></a>React组件</h3><p>React 组件可以让你把UI分割为独立、可复用的片段，并将每一片段视为相互独立的部分</p>
+<p><strong>组件是由一个个的HTML元素组成的</strong></p>
+<p><strong>概念上来讲, 组件就像JS中的函数。它们接受用户输入（props），并且返回一个React对象，用来描述展示在页面中的内容</strong></p>
+<ul>
+<li><strong>React创建组件的两种方式</strong><ul>
+<li>通过 JS函数 创建（无状态组件）</li>
+<li>通过 class 创建（有状态组件）</li>
+</ul>
+</li>
+<li><strong>函数式组件 和 class 组件的使用场景说明</strong><ul>
+<li>如果一个组件仅仅是为了展示数据，那么此时就可以使用 函数组件</li>
+<li>如果一个组件中有一定业务逻辑，需要操作数据，那么就需要使用 class 创建组件，因为，此时需要使用 state</li>
+</ul>
+</li>
+<li><strong>JavaScript函数创建</strong><ul>
+<li>函数名称必须为大写字母开头，React通过这个特点来判断是不是一个组件</li>
+<li>函数必须有返回值，返回值可以是：JSX对象或null</li>
+<li>返回的JSX，必须有一个根元素</li>
+<li>组件的返回值使用()包裹，避免换行问题</li>
+</ul>
+</li>
+<li><strong>React组件API</strong><ul>
+<li><strong>setState</strong> 设置状态</li>
+<li>replaceState 替换状态</li>
+<li>setProps 设置属性</li>
+<li>replaceProps 替换属性</li>
+<li>forceUpdate 强制更新</li>
+<li>findDOMNode 获取DOM节点,查找真实DOM</li>
+<li>React.findDOMNode()只在mounted组件中调用，如果在组件的render()方法中调用React.findDOMNode()就会抛出异常</li>
+</ul>
+</li>
+<li><strong>Props和state的区别：</strong><ul>
+<li>一个组件的显示形态可以由数据状态和外部参数所决定，外部参数也就是props，而数据状态就是state。</li>
+<li>props经常被用作渲染组件和初始化状态，当一个组件被实例化之后，它的<strong>props是只读的，不可改变的</strong>。如果props在渲染过程中可以被改变，会导致这个组件显示的形态变得不可预测。只有通过父组件重新渲染的方式才可以把新的props传入组件中。</li>
+<li>props是一个从外部传进组件的参数，主要作为就是从父组件向子组件传递数据，它具有可读性和不变性，只能通过外部组件主动传入新的props来重新渲染子组件，否则子组件的props以及展现形式不会改变。</li>
+<li>state不同于props的一点是<strong>，state是可以被改变的</strong>。不过，不可以直接通过this.state=的方式来修改，而需要通过this.setState()方法来修改state。</li>
+</ul>
+</li>
+</ul>
+<h3 id="React组件的生命周期"><a href="#React组件的生命周期" class="headerlink" title="React组件的生命周期"></a><strong>React组件的生命周期</strong></h3><ul>
+<li><strong>组件生命周期的三个状态</strong><ul>
+<li>Mounting: 已插入真实DOM</li>
+<li>Updating: 正在被重新渲染</li>
+<li>Unmounting: 已移除真实DOM</li>
+</ul>
+</li>
+<li><strong>生命周期方法</strong><ul>
+<li><strong>componentWillMount：</strong> 在渲染前调用，在客户端也在服务端</li>
+<li><strong>componentDidMount：</strong> 在第一次渲染后调用，只在客户端。之后组件已经生成了对应的DOM结构，可以通过this.getDOMNode()来进行访问。如果你想和其他JavaScript框架一起使用，可以在这个方法中调用setTimeout, setInterval或者发送AJAX请求等操作(防止异部操作阻塞UI)</li>
+<li><strong>componentWillReceiveProps：</strong> 在初始化render时不会被调用，当组件接收到一个新的prop时被调用</li>
+<li><strong>houldComponentUpdate：</strong> 返回一个布尔值。当确认不需要更新组件时使用。在组件接收到新的state或新的props时被调用。在初始化时或使用forceUpdate时不被调用</li>
+<li><strong>componentWillUpdate：</strong> 初始化不会调用。组件接收到新的state或者props但还没有render时被调用</li>
+<li><strong>componentDidUpdate：</strong> 初始化不会调用。组件完成更新后立即调用。</li>
+<li><strong>componentWillUnmount：</strong> 组件从DOM中移除的时候立刻被调用。</li>
+</ul>
+</li>
+</ul>
+<h3 id="Redux组成"><a href="#Redux组成" class="headerlink" title="Redux组成"></a>Redux组成</h3><p>redux 是一个应用数据流框架，主要是解决了<strong>组件间状态共享</strong>的问题，原理是<strong>集中式管理</strong>，主要有三个核心方法，<strong>action，store，reducer</strong></p>
+<ul>
+<li><p><strong>工作流程：</strong> view 调用 store 的 dispatch 接收 action 传入 store，reducer 进行 state 操作，view 通过 store 提供的 getState 获取最新的数据</p>
+</li>
+<li><p><strong>Redux的三大原则：</strong></p>
+<ul>
+<li><strong>单一数据源：</strong>整个应用的 state 被储存在 <strong>一棵 object tree</strong> 中，并且这个 object tree 只存在于 <strong>唯一一个 store</strong> 中。</li>
+<li><strong>State是只读的：</strong><ul>
+<li><strong>唯一改变 state 的方法就是触发 action。</strong></li>
+<li>这样确保了 视图 和 网络请求 都<strong>不能直接修改 state</strong>，相反它们只能表达想要修改的意图。因为所有的修改都被<strong>集中化</strong>处理，且严格按照一个接一个的顺序执行，因此不用担心 <strong>竞态条件</strong>的出现。</li>
+</ul>
+</li>
+<li><strong>使用纯函数来修改state：</strong>为了描述 action 如何改变 state tree ，你需要编写reducers。</li>
+</ul>
+</li>
+<li><p><strong>Redux的核心由三部分组成：Store,Action, Reducer。</strong></p>
+<ul>
+<li><strong>Store</strong>： 是个对象，贯穿你整个应用的数据都应该存储在这里</li>
+<li><strong>Action</strong>： 是个对象，必须包含type这个属性，reducer将根据这个属性值来对store进行相应的处理。除此之外的属性，就是进行这个操作需要的数据</li>
+<li><strong>Reducer</strong>:：是个函数。接受两个参数：要修改的数据(state) 和 action对象。根据action.type来决定采用的操作，对state进行修改，最后返回新的state</li>
+<li><strong>各部分之间的关系：</strong>·Store提供了dispatch方法 → 触发action。dispatch方法接受action对象作为参数，触发action → reducer来处理。</li>
+</ul>
+</li>
+<li><p><strong>Store的三个方法：</strong></p>
+<ul>
+<li><strong>getState：</strong>用来获取store里面存储的数据。<code>store.getState()</code> 不需要任何参数，并且将返回 store 的当前状态</li>
+<li><strong>dispatch:</strong> store里的数据不能直接修改，只能通过触发action来进行修改，这个方法就是用来触发action。<code>store.dispatch(action)</code>传入 action 对象，并且将调用 reducer 函数，向其传递当前状态和所派遣的 action。</li>
+<li><strong>subscribe()：</strong>订阅store改变时，要进行的操作。比如在react中，当store改变时，我们需要调用render方法对视图进行更新。<code>store.subscribe(cb)</code>传入监听器回调函数，每当状态改变时，就会调用该函数。</li>
+</ul>
+</li>
+<li><p><strong>Reducer中避免那些操作：</strong></p>
+<ul>
+<li>不得修改传入的参数</li>
+<li>不得调用非纯函数，如Date.now()或 Math.random()</li>
+<li>不得执行有副作用的操作，如API请求和路由跳转</li>
+<li>在dispatch方法之前进行api请求：在dispatch之外先进行api异步请求，当收到请求结果后，根据结果的不同选择dispatch不同的action</li>
+<li>应用redux-thunk,redux-promise等中间件，就可以在dispatch函数中直接执行api请求等异步操作了</li>
+</ul>
+</li>
+<li><p><strong>纯函数：</strong></p>
+<ul>
+<li>只要每次给定相同的输入值，就一定会得到相同的输出值: 例如传入1与2，就一定会得到3</li>
+<li>不会改变原始输入参数，或是外部的环境，所以没有副作用</li>
+<li>不依頼其他外部的状态，变量或常量</li>
+</ul>
+</li>
+<li><p><strong>怎么用reducer和UI层进行连接：</strong></p>
+<ul>
+<li>用户产生了操作，调用了actions 的方法</li>
+<li>actions的方法被调用，创建了带有标示性信息的action</li>
+<li>actions将通过调用store.dispatch方法发送到了reducer中，reducer接收到action并根据标识信息判断之后返回了新的state</li>
+<li>store的state被reducer更改为新state的时候，store.subscribe方法里的回调函数会执行，此时就可以通知view去重新获取state</li>
+</ul>
+</li>
+<li><p><strong>flux 也是用来进行数据操作的：</strong>有四个组成部分 <strong>action，dispatch，view，store</strong>，工作流程是 view 发出一个 action，派发器接收 action，让 store 进行数据更新，更新完成以后 store 发出 change，view 接受 change 更新视图。</p>
+</li>
+<li><p><strong>Redux 和 Flux：</strong> </p>
+<ul>
+<li>主要区别在于 Flux 有多个可以改变应用状态的 store，在 Flux 中dispatcher 被用来传递数据到注册的回调事件，但是在 redux 中只能定义一个可更新状态的 store，redux 把 store 和 Dispatcher 合并,结构更加简单清晰</li>
+<li>新增 state,对状态的管理更加明确，通过 redux，流程更加规范了，减少手动编码量，提高了编码效率，同时缺点时当数据更新时有时候组件不需要，但是也要重新绘制，有些影响效率。一般情况下，我们在构建多交互，多数据流的复杂项目应用时才会使用它们</li>
+</ul>
+</li>
+<li><p><strong>redux 有什么缺点：</strong></p>
+<ul>
+<li>一个组件所需要的数据，必须由父组件传过来，而不能像 flux 中直接从 store 取。</li>
+<li>当一个组件相关数据更新时，即使父组件不需要用到这个组件，父组件还是会重新 render，可能会有效率影响，或者需要写复杂的 shouldComponentUpdate 进行判断。</li>
+</ul>
+</li>
+<li><p><strong>Redux中间键：</strong></p>
+<ul>
+<li><p><strong>redux-thunk：</strong>可以在actionCreators里通过返回一个函数，然后就可以在函数里编写某些异步操作了，待异步操作结束，最后通过传入的store.dispatch，发出action通知给Store要进行状态更新。</p>
+<p><strong>场景:</strong>react-thunk 比较适合于简单的API请求的场景</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; applyMiddleware, createStore &#125; <span class="keyword">from</span> <span class="string">'redux'</span>;</span><br><span class="line"><span class="keyword">import</span> thunk <span class="keyword">from</span> <span class="string">'redux-thunk'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> store = createStore(</span><br><span class="line">  reducer,</span><br><span class="line">  applyMiddleware(thunk)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p><strong>CreateStore:</strong>其实可以接受三个参数，第二个参数preloadedState一般作为整个应用的初始化数据，如果传入了这个参数，applyMiddleware就会被当做第三个参数处理</p>
+<p><strong>applyMiddleware：</strong>applyMiddleware顾名思义，用于调用存放各种中间件</p>
+</li>
+<li><p><strong>redux-promise</strong> <strong>:</strong>适合输入输出操作</p>
+<p>先判断是不是标准的 flux action。</p>
+<p>如果不是，那么判断是否是 promise, 是的话就执行 action.then(dispatch)，否则执行 next(action)。</p>
+<p>如果是, 就先判断 payload 是否是 promise，如果是的话 payload.then 获取数据，然后把数据作为 payload 重新 dispatch({ …action, payload: result}) ；不是的话就执行 next(action)</p>
+</li>
+<li><p><strong>redux-saga:</strong></p>
+<p>redux-saga是一个管理redux应用异步操作的中间件，用于代替 redux-thunk 的。它通过创建 Sagas 将所有异步操作逻辑存放在一个地方进行集中处理，以此将react中的同步操作与异步操作区分开来，以便于后期的管理与维护</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="地址栏输入url发生什么"><a href="#地址栏输入url发生什么" class="headerlink" title="地址栏输入url发生什么"></a>地址栏输入url发生什么</h3><ul>
+<li><p><strong>查询ip地址</strong></p>
+<ul>
+<li>浏览器解析出url中的域名</li>
+<li>查询浏览器的DNS缓存</li>
+<li>浏览器中没有DNS缓存，则查找本地客户端hosts文件有无对应的ip地址。</li>
+<li>hosts中无，则查找本地DNS服务器（运营商提供的DNS服务器）有无对应的DNS缓存。</li>
+<li>若本地DNS没有DNS缓存，则向根服务器查询，进行递归查找</li>
+<li>递归查找从顶级域名开始（如.com）,一步步缩小范围，最终客户端取得ip地址。</li>
+</ul>
+</li>
+<li><h4 id="tcp连接与http连接"><a href="#tcp连接与http连接" class="headerlink" title="tcp连接与http连接"></a><strong>tcp连接与http连接</strong></h4><ul>
+<li>http协议建立在tcp协议之上，http请求前，需先进行tcp连接，形成客户端到服务器的稳定的通道。俗称TCP的三次握手。</li>
+<li>tcp连接完成后，http请求开始，请求有多种方式，常见的有get，post等。</li>
+<li>http请求包含请求头，也可能包含请求体两部分，请求头中包含我们希望对请求文件的操作的信息，请求体中包含传递给后台的参数。</li>
+<li>服务器收到http请求后，后台开始工作，如负载平衡，跨域等，这里就是后端的工作了。</li>
+<li>文件处理完毕，生成响应数据包，响应也包含两部分，响应头和相应体，响应体就是我们所请求的文件。</li>
+<li>经过网络传输，文件被下载到本地客户端，客户端开始加载。</li>
+</ul>
+</li>
+<li><p><strong>html渲染：</strong></p>
+<ul>
+<li>客户端浏览器加载了html文件后，由上到下解析html为DOM树（DOM Tree）</li>
+<li>遇到css文件，css中的url发起http请求</li>
+<li>这是第二次http请求，由于http1.1协议增加了Connection: keep-alive声明，故tcp连接不会关闭，可以复用。</li>
+<li>http连接是无状态连接，客户端与服务器端需要重新发起请求–响应。在请求css的过程中，解析器继续解析html，然后到了script标签。</li>
+<li>由于script可能会改变DOM结构，故解析器停止生成DOM树，解析器被js阻塞，等待js文件发起http请求，然后加载。这是第三次http请求。js执行完成后解析器继续解析。</li>
+<li>由于css文件可能会影响js文件的执行结果，因此需等css文件加载完成后再执行</li>
+<li>浏览器收到css文件后，开始解析css文件为CSSOM树（CSS Rule Tree）。</li>
+<li>CSSOM树生成后，DOM Tree与CSS Rule Tree结合生成渲染树（Render Tree）。</li>
+<li>Render Tree会被css文件阻塞，渲染树生成后，先布局，绘制渲染树中节点的属性(位置，宽度，大小等)，然后渲染，页面就会呈现信息。</li>
+<li>继续边解析边渲染，遇到了另一个js文件，js文件执行后改变了DOM树，渲染树从被改变的dom开始再次渲染。</li>
+<li>继续向下渲染，碰到一个img标签，浏览器发起http请求，不会等待img加载完成，继续向下渲染，之后再重新渲染此部分。</li>
+<li>DOM树遇到html结束标签，停止解析，进而渲染结束。</li>
+</ul>
+</li>
+</ul>
+<h3 id="有那些网站优化的方法？"><a href="#有那些网站优化的方法？" class="headerlink" title="有那些网站优化的方法？"></a>有那些网站优化的方法？</h3><ul>
+<li>减少DNS查询:将服务器域名的ip信息加入本地host文件</li>
+<li>减少http请求数量，对于图片使用雪碧图,对于html文件和css文件，js文件分别进行合并操作</li>
+<li>减少下载时间：压缩图片，使用压缩应用压缩文档中的空格，删除文件多余的语句和注释，创造自己的js精简库和精简框架,使用本地浏览器缓存。</li>
+<li>提前渲染开始时间：将css链接放在html头部。</li>
+<li>减轻解析器的阻塞：将js链接放在body尾部。</li>
+</ul>
+<h3 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h3><p>分布式版本控制系统</p>
+<ul>
+<li><p><strong>常用的命令：</strong></p>
+<ul>
+<li>git add ：放入暂存区</li>
+<li>git commit：提交到本地仓库</li>
+<li>git reset：版本回退</li>
+<li>git checkout：切换分支</li>
+<li>git branch：创建分支</li>
+<li>git push :上传</li>
+<li>git pull:更新</li>
+<li>git merge:合并</li>
+<li>git checkout —文件名：撤销在工作区做的修改</li>
+</ul>
+</li>
+<li><p><strong>开发流程：</strong></p>
+<ul>
+<li><p>永久分支：</p>
+<ul>
+<li>master：主分支。用于存放经过测试，完全稳定的代码</li>
+<li>dev：开发分支。一开始从master分离而来，用于存放基本稳定的代码</li>
+<li>testing：测试分支。从dev分离而来，用于生成测试产品和修改bug。 </li>
+</ul>
+</li>
+<li><p>临时分支：</p>
+<ul>
+<li>feature：特性分支。 从dev分支分离而来，用于开发项目功能</li>
+<li>hotfixes：紧急分支。当产品已经发布，发现紧急bug，创建hotfixes分支进行紧急修复，完成后合并到master和dev。</li>
+<li>release：预发布分支。每次发布有一个分支。从testing分离而来，用于生成预发布产品和回归测试。</li>
+</ul>
+</li>
+<li><p>远程拉项目 =&gt; 本地创建分支（开发）=&gt; 提交pull，request请求 =&gt; 技术组长审核 =&gt;合并到开发分支上</p>
+<p>如果有测试问题，就修改，提交，组长审核。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="项目开发流程"><a href="#项目开发流程" class="headerlink" title="项目开发流程"></a>项目开发流程</h3><ul>
+<li><strong>Webpack配置：</strong><ul>
+<li><strong>enrty（项目入口）</strong>　　<strong>output（出口文件）</strong>  <strong>plugin</strong></li>
+<li><strong>module（模块的处理）**</strong>：**loader的配置主要在module.rules中进行，这是一个数组，每一个rule做了两件事</li>
+<li><strong>识别文件类型，来确定具体处理该数据的loader(Rule.test属性)</strong></li>
+<li><strong>使用相关的loader对文件进行相关的操作转换(Rule.use属性）</strong></li>
+</ul>
+</li>
+<li><strong>常用的loader：</strong><ul>
+<li>转换编译：script-loader, babel-loader,ts-loader,coffee-loader</li>
+<li>处理样式：style-loader,css-loader,less-loader,sass-loader,postcss-loader</li>
+<li>处理文件：raw–loader,url-loader,file-loader</li>
+<li>处理数据：csv-loader,xml-loader</li>
+<li>处理模板语言：html-loader,pug-loader,jade-loader,markdown-loader</li>
+<li>清理和测试：mocha-loader,eslint-loader</li>
+</ul>
+</li>
+</ul>
+<h3 id="项目优化"><a href="#项目优化" class="headerlink" title="项目优化"></a>项目优化</h3><ul>
+<li><strong>浏览器页面优化：</strong><ul>
+<li>写出高效的css代码</li>
+<li>避免使用css表达式</li>
+<li>把css文件放在页面顶部</li>
+<li>指定页面图片的尺寸</li>
+<li>页面头部标明文档编码</li>
+<li>精灵图</li>
+<li>图片懒加载</li>
+<li>减少http请求</li>
+</ul>
+</li>
+<li><strong>Js代码块优化：</strong><ul>
+<li>优化js代码逻辑</li>
+</ul>
+</li>
+<li><strong>优化建议：</strong><ul>
+<li>避免使用通配符</li>
+<li>让css引擎快速辨别该规则是否适用于当前元素：多用id或class选择符，少用标签选择符</li>
+<li>不要画蛇添足把id和class或标签和class等连着写</li>
+<li>尽量避免使用后代选择符，去除不必要的祖先元素，可以考虑使用class选择符来替换后代选择符</li>
+</ul>
+</li>
+<li><strong>避免接口重复调用</strong>：<ul>
+<li>在data里定义一个初始状态，设为false，作为加载标志</li>
+<li>请求之前将状态变成true,再去请求接口，这时一直是加载状态</li>
+<li>当接口响应之后不管是成功还是失败都将状态变成false</li>
+<li>每次请求之前都判断一下加载状态，如果是true直接return</li>
+</ul>
+</li>
+<li><strong>怎么优化数据逻辑处理：</strong><ul>
+<li>把逻辑较多的功能再细分一下，封装好</li>
+<li>用数组的数据存储 应该算最简便的方式，建议无复杂的逻辑处理  还是使用数组的filter来过滤数据</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/18/自我总结面试题/" rel="next" title>
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="LuoXiaoRuo">
+            
+              <p class="site-author-name" itemprop="name">LuoXiaoRuo</p>
+              <div class="site-description motion-element" itemprop="description">玲珑骰子安红豆，入骨相思知不知。</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#React面试题"><span class="nav-number">1.</span> <span class="nav-text">React面试题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#异步几种方式，实现的原理"><span class="nav-number">1.1.</span> <span class="nav-text">异步几种方式，实现的原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#React的优点："><span class="nav-number">1.2.</span> <span class="nav-text">React的优点：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#React核心"><span class="nav-number">1.3.</span> <span class="nav-text">React核心</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#虚拟DOM"><span class="nav-number">1.4.</span> <span class="nav-text">虚拟DOM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Jsx语法"><span class="nav-number">1.5.</span> <span class="nav-text">Jsx语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#React组件"><span class="nav-number">1.6.</span> <span class="nav-text">React组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#React组件的生命周期"><span class="nav-number">1.7.</span> <span class="nav-text">React组件的生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Redux组成"><span class="nav-number">1.8.</span> <span class="nav-text">Redux组成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#地址栏输入url发生什么"><span class="nav-number">1.9.</span> <span class="nav-text">地址栏输入url发生什么</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#tcp连接与http连接"><span class="nav-number">1.9.1.</span> <span class="nav-text">tcp连接与http连接</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#有那些网站优化的方法？"><span class="nav-number">1.10.</span> <span class="nav-text">有那些网站优化的方法？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Git"><span class="nav-number">1.11.</span> <span class="nav-text">Git</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#项目开发流程"><span class="nav-number">1.12.</span> <span class="nav-text">项目开发流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#项目优化"><span class="nav-number">1.13.</span> <span class="nav-text">项目优化</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019-06 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LuoXiaoRuo</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.2</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.2"></script>
+
+  <script src="/js/motion.js?v=7.1.2"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.2"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.2"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.2"></script>
+<script src="/js/post-details.js?v=7.1.2"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.2"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "./public/search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+        // ref: https://github.com/ForbesLindesay/unescape-html
+        var unescapeHtml = function(html) {
+          return String(html)
+            .replace(/&quot;/g, '"')
+            .replace(/&#39;/g, '\'')
+            .replace(/&#x3A;/g, ':')
+            // replace all the other &#x; chars
+            .replace(/&#(\d+);/g, function (m, p) { return String.fromCharCode(p); })
+            .replace(/&lt;/g, '<')
+            .replace(/&gt;/g, '>')
+            .replace(/&amp;/g, '&');
+        };
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                content = unescapeHtml(content);
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
