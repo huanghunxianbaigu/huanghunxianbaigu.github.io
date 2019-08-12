@@ -101,7 +101,7 @@
 <meta property="og:site_name" content="黄昏现白骨">
 <meta property="og:description" content="React面试题 异步几种方式，实现的原理  * Promise： 常用的方法all、ones         * 他调用了函数resolve()和reject()。resolve()函数告诉promise用户promise已解决；reject()函数告诉promise用户promise未能顺利完成。                   * 优点：回调函数写成了链式写法，程序的流程可以看得很清楚">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-08T13:46:48.071Z">
+<meta property="og:updated_time" content="2019-08-12T03:18:33.315Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="黄昏现白骨">
 <meta name="twitter:description" content="React面试题 异步几种方式，实现的原理  * Promise： 常用的方法all、ones         * 他调用了函数resolve()和reject()。resolve()函数告诉promise用户promise已解决；reject()函数告诉promise用户promise未能顺利完成。                   * 优点：回调函数写成了链式写法，程序的流程可以看得很清楚">
@@ -410,12 +410,24 @@
                 
               
 
-              <time title="创建时间：2019-08-08 10:15:29 / 修改时间：21:46:48" itemprop="dateCreated datePublished" datetime="2019-08-08T10:15:29+08:00">2019-08-08</time>
+              <time title="创建时间：2019-08-08 10:15:29" itemprop="dateCreated datePublished" datetime="2019-08-08T10:15:29+08:00">2019-08-08</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-12 11:18:33" itemprop="dateModified" datetime="2019-08-12T11:18:33+08:00">2019-08-12</time>
               
             
           </span>
@@ -666,7 +678,7 @@
 </ul>
 </li>
 <li><p><strong>何为受控组件(controlled component)</strong></p>
-<p>在 HTML 中，类似 <input>, <textarea> 和 </textarea><select> 这样的表单元素会维护自身的状态，并基于用户的输入来更新。当用户提交表单时，前面提到的元素的值将随表单一起被发送。但在 React 中会有些不同，包含表单元素的组件将会在 state 中追踪输入的值，并且每次调用回调函数时，如 onChange 会更新 state，重新渲染组件。一个输入表单元素，它的值通过 React 的这种方式来控制，这样的元素就被称为”受控元素”。</select></p>
+<p>在 HTML 中，类似 <code>&lt;input&gt;, &lt;textarea&gt; 和 &lt;select&gt;</code>这样的表单元素会维护自身的状态，并基于用户的输入来更新。当用户提交表单时，前面提到的元素的值将随表单一起被发送。但在 React 中会有些不同，包含表单元素的组件将会在 state 中追踪输入的值，并且每次调用回调函数时，如 onChange 会更新 state，重新渲染组件。一个输入表单元素，它的值通过 React 的这种方式来控制，这样的元素就被称为”受控元素”。</p>
 </li>
 <li><p><strong>何为高阶组件(higher order component)</strong></p>
 <p>高阶组件是一个以组件为参数并返回一个新组件的函数。HOC 运行你重用代码、逻辑和引导抽象。最常见的可能是 Redux 的 connect 函数。除了简单分享工具库和简单的组合，HOC 最好的方式是共享 React 组件之间的行为。如果你发现你在不同的地方写了大量代码来做同一件事时，就应该考虑将代码重构为可重用的 HOC。</p>
@@ -739,9 +751,8 @@
 </ul>
 </li>
 <li><p><strong>Unmounting（卸载阶段：涉及1个钩子函数）</strong></p>
-<ul>
-<li><strong>componentWillUnmount():</strong>组件渲染之后调用，只调用一次</li>
-</ul>
+</li>
+<li><p><strong>componentWillUnmount():</strong>组件渲染之后调用，只调用一次</p>
 </li>
 <li><h3 id="新的生命周期"><a href="#新的生命周期" class="headerlink" title="新的生命周期"></a><strong>新的生命周期</strong></h3><ul>
 <li><strong>Mounting（加载阶段：涉及4个钩子函数）</strong></li>
